@@ -1521,6 +1521,9 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
+    devise-i18n (1.11.0)
+      devise (>= 4.9.0)
+    devise-i18n-views (0.3.7)
     diff-lcs (1.5.0)
     erubi (1.12.0)
     factory_bot (6.2.1)
@@ -1627,6 +1630,9 @@ GEM
     rails-html-sanitizer (1.6.0)
       loofah (~> 2.21)
       nokogiri (~> 1.14)
+    rails-i18n (7.0.8)
+      i18n (>= 0.7, < 2)
+      railties (>= 6.0.0, < 8)
     railties (6.1.7.6)
       actionpack (= 6.1.7.6)
       activesupport (= 6.1.7.6)
@@ -1764,6 +1770,8 @@ DEPENDENCIES
   caxlsx
   caxlsx_rails
   devise
+  devise-i18n
+  devise-i18n-views
   factory_bot_rails
   jbuilder (~> 2.7)
   listen (~> 3.3)
@@ -1775,6 +1783,7 @@ DEPENDENCIES
   rack-mini-profiler (~> 2.0)
   rails (~> 6.1.6)
   rails-erd
+  rails-i18n
   rspec-rails
   rubocop-airbnb
   sass-rails (>= 6)
@@ -1792,4 +1801,4 @@ RUBY VERSION
    ruby 3.0.4p208
 
 BUNDLED WITH
-   2.3.16
+   2.4.19

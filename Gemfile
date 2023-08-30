@@ -69,3 +69,8 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem "aws-sdk", "~> 3.0"
+
+# for japanese
+gem 'rails-i18n'
+gem 'devise-i18n'
+gem 'devise-i18n-views'
