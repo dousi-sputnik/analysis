@@ -47,5 +47,16 @@ class ItemsController < ApplicationController
     rows = bulk_data.split("\n")
     row.each do |row|
       jan_code, product_name, sales = row.split("\t")
-      current_user.items.create(jan_code)
+      current_user.items.create(jan_code: jan_code, product_name: product_name, sales: sales)
+    end
+    redirect_to user_items_path(current_user), notice: '商品情報が作成されました'
+  end
+  
+  private
+    def set_item
+      @item = current_user.items.find(params{:id})
+    end
+    def items_params
+      params.require(:item).permit(:jan_code, :product_name, :sales)
+    end
 end
