@@ -50,20 +50,22 @@ class ItemsController < ApplicationController
       else
         item_classification = "C"
       end
-      @abc_items << {
-        jan_code: item.jan_code,
-        product_name: item.product_name,
-        sales: item.sales,
-        cumulative_sales: cumulative_sales,
-        cumutative_percentage: camulative_percentage.round(2),
-        classification: item_classification,
-      }
+      @abc_items.each do |item|
+        current_user.analysis_results.create(
+          jan_code: item[:jan_code],
+          product_name: item[:product_name],
+          sales: item[:sales],
+          cumulative_sales: item[:cumulative_sales],
+          cumulative_percentage: item[:cumulative_percentage],
+          classification: item[:classification]
+        )
+      end
     end
     respond_to do |format|
       format.html
-      format.xlsx {
+      format.xlsx do
         response.headers['Content-Disponsition'] = 'attachment; filename="abc_analysis.xlsx"'
-      }
+      end
       format.pdf do
         render pdf: "abc_analysis",
                layout: 'pdf',

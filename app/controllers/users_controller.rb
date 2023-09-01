@@ -3,6 +3,7 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update]
 
   def show
+    @analysis_results = current_user.analysis_results.order(created_at: :desc)
   end
 
   def edit

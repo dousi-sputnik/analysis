@@ -10,7 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_08_30_004332) do
+ActiveRecord::Schema.define(version: 2023_09_01_054812) do
+
+  create_table "analysis_results", charset: "utf8mb3", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "jan_code"
+    t.string "product_name"
+    t.integer "sales"
+    t.decimal "cumulative_sales", precision: 10
+    t.decimal "cumulative_percentage", precision: 10
+    t.string "classification"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_analysis_results_on_user_id"
+  end
 
   create_table "items", charset: "utf8mb3", force: :cascade do |t|
     t.bigint "user_id", null: false
@@ -41,5 +54,6 @@ ActiveRecord::Schema.define(version: 2023_08_30_004332) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "analysis_results", "users"
   add_foreign_key "items", "users"
 end
