@@ -40,6 +40,7 @@ class ItemsController < ApplicationController
     total_sales = @items.sum(:sales)
     cumulative_sales = 0
     @abc_items = []
+    
     @items.each do |item|
       cumulative_sales += item.sales
       cumulative_percentage = (cumulative_sales.to_f / total_sales) * 100
@@ -50,45 +51,78 @@ class ItemsController < ApplicationController
       else
         item_classification = "C"
       end
-      @abc_items.each do |item|
-        current_user.analysis_results.create(
-          jan_code: item[:jan_code],
-          product_name: item[:product_name],
-          sales: item[:sales],
-          cumulative_sales: item[:cumulative_sales],
-          cumulative_percentage: item[:cumulative_percentage],
-          classification: item[:classification]
-        )
-      end
+      
+      # ここで@abc_itemsにデータを追加します。
+      @abc_items << {
+        jan_code: item.jan_code,
+        product_name: item.product_name,
+        sales: item.sales,
+        cumulative_sales: cumulative_sales,
+        cumulative_percentage: cumulative_percentage,
+        classification: item_classification
+      }
     end
+    
+    # @abc_itemsに基づいてanalysis_resultsテーブルにデータを保存します。
+    @abc_items.each do |item_data|
+      current_user.analysis_results.create(item_data)
+    end
+    
     respond_to do |format|
       format.html
       format.xlsx do
         response.headers['Content-Disponsition'] = 'attachment; filename="abc_analysis.xlsx"'
       end
       format.pdf do
-        render pdf: "abc_analysis",
-               layout: 'pdf',
-               template: 'items/analysis.pdf.erb',
+        render pdf: "analysis",
+               layout: false,
+               template: 'items/analysis_pdf.erb',
                encoding: 'UTF-8'
       end
     end
   end
+  
 
   def create_bulk
     bulk_data = params[:bulk_input]
     rows = bulk_data.split("\n")
-    rows.each do |row|
-      jan_code, product_name, sales = row.split("\t")
-      current_user.items.create(jan_code: jan_code, product_name: product_name, sales: sales)
+    error_messages = []
+    success_count = 0
+  
+    # トランザクションを使用
+    Item.transaction do
+      rows.each_with_index do |row, index|
+        jan_code, product_name, sales_str = row.split("\t") # Split into three variables
+        sales = sales_str.to_i # Convert sales string to integer
+        item = current_user.items.find_or_initialize_by(jan_code: jan_code)
+        item.product_name = product_name
+        item.sales = sales
+        if item.save
+          success_count += 1
+        else
+          Rails.logger.error("Failed to save item with JAN Code: #{jan_code}. Errors: #{item.errors.full_messages.join(', ')}")
+          error_messages << "行 #{index + 1} (JAN Code #{jan_code}): #{item.errors.full_messages.join(', ')}"
+        end
+      end
+  
+      # すべての保存が成功していない場合、トランザクションをロールバック
+      raise ActiveRecord::Rollback unless error_messages.empty?
     end
-    redirect_to analysis_path, notice: '商品情報が作成されました'
+  
+    if error_messages.empty?
+      redirect_to analysis_path, notice: "#{success_count} 商品情報が作成されました"
+    else
+      redirect_to new_user_item_path(current_user), alert: "次の商品の登録に失敗しました: #{error_messages.join(', ')}"
+    end
   end
+  
+  
+  
 
   private
 
   def set_item
-    @item = current_user.items.find(params { :id })
+    @item = current_user.items.find(params[:id])
   end
 
   def items_params

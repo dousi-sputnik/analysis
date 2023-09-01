@@ -1,0 +1,18 @@
+<div class="container">
+  <h1>Welcome to ABC Analysis App</h1>
+  <p>ABC分析についての説明...</p>
+
+  <% if user_signed_in? %>
+    <p>
+      Welcome, <%= current_user.email %>!
+      <%= link_to 'Profile', user_path(current_user) %>
+      <%= link_to 'Items', user_items_path(current_user) %>
+      <%= link_to 'Logout', destroy_user_session_path, method: :delete, class: 'btn btn-danger' %>
+    </p>
+  <% else %>
+    <p>
+      <%= link_to 'Sign Up', new_user_registration_path, class: 'btn btn-primary' %>
+      <%= link_to 'Login', new_user_session_path, class: 'btn btn-secondary' %>
+    </p>
+  <% end %>
+</div>
