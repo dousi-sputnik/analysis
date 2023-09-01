@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_item, only: [:show, :edit, :update, :destroy]
-  
+  before_action :set_item, only: [:edit, :update, :destroy]
+
   def index
     @items = current_user.items.order(sales: :desc)
   end
@@ -17,9 +17,6 @@ class ItemsController < ApplicationController
     else
       render :new
     end
-  end
-
-  def show
   end
 
   def edit
@@ -40,23 +37,26 @@ class ItemsController < ApplicationController
 
   def abc_analysis
     @items = current_user.items.order(sales: :desc)
+    total_sales = 
   end
 
   def create_bulk
     bulk_data = params[:bulk_input]
     rows = bulk_data.split("\n")
-    row.each do |row|
+    rows.each do |row|
       jan_code, product_name, sales = row.split("\t")
       current_user.items.create(jan_code: jan_code, product_name: product_name, sales: sales)
     end
     redirect_to user_items_path(current_user), notice: '商品情報が作成されました'
   end
-  
+
   private
-    def set_item
-      @item = current_user.items.find(params{:id})
-    end
-    def items_params
-      params.require(:item).permit(:jan_code, :product_name, :sales)
-    end
+
+  def set_item
+    @item = current_user.items.find(params { :id })
+  end
+
+  def items_params
+    params.require(:item).permit(:jan_code, :product_name, :sales)
+  end
 end
