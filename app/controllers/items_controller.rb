@@ -35,9 +35,42 @@ class ItemsController < ApplicationController
     redirect_to user_items_url, notice: '商品を削除しました。'
   end
 
-  def abc_analysis
+  def analysis
     @items = current_user.items.order(sales: :desc)
-    total_sales = 
+    total_sales = @items.sum(:sales)
+    cumulative_sales = 0
+    @abc_items = []
+    @items.each do |item|
+      cumulative_sales += item.sales
+      cumulative_percentage = (cumulative_sales.to_f / total_sales) * 100
+      if cumulative_percentage <= 70
+        item_classification = "A"
+      elsif cumulative_percentage <= 90
+        item_classification = "B"
+      else
+        item_classification = "C"
+      end
+      @abc_items << {
+        jan_code: item.jan_code,
+        product_name: item.product_name,
+        sales: item.sales,
+        cumulative_sales: cumulative_sales,
+        cumutative_percentage: camulative_percentage.round(2),
+        classification: item_classification,
+      }
+    end
+    respond_to do |format|
+      format.html
+      format.xlsx {
+        response.headers['Content-Disponsition'] = 'attachment; filename="abc_analysis.xlsx"'
+      }
+      format.pdf do
+        render pdf: "abc_analysis",
+               layout: 'pdf',
+               template: 'items/analysis.pdf.erb',
+               encoding: 'UTF-8'
+      end
+    end
   end
 
   def create_bulk
@@ -47,7 +80,7 @@ class ItemsController < ApplicationController
       jan_code, product_name, sales = row.split("\t")
       current_user.items.create(jan_code: jan_code, product_name: product_name, sales: sales)
     end
-    redirect_to user_items_path(current_user), notice: '商品情報が作成されました'
+    redirect_to analysis_path, notice: '商品情報が作成されました'
   end
 
   private

@@ -9,5 +9,5 @@ Rails.application.routes.draw do
       end
     end
   end
-  get '/abc_analysis', to: 'items#abc_analysis'
+  get '/analysis', to: 'items#analysis'
 end
