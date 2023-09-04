@@ -56,17 +56,11 @@ class ItemsController < ApplicationController
         item = current_user.items.find_or_initialize_by(jan_code: jan_code)
         item.product_name = product_name
         item.sales = sales
-        if item.save
-          # Save related analysis_results as well
-          analysis_result = analysis_session.analysis_results.new(jan_code: jan_code, product_name: product_name, sales: sales)
-          unless analysis_result.save
-            error_messages << "行 #{index + 1} (JAN Code #{jan_code}): #{analysis_result.errors.full_messages.join(', ')}"
-          end
-        else
+        unless item.save
           error_messages << "行 #{index + 1} (JAN Code #{jan_code}): #{item.errors.full_messages.join(', ')}"
         end
       end
-  
+
       raise ActiveRecord::Rollback unless error_messages.empty?
     end
   
@@ -76,10 +70,6 @@ class ItemsController < ApplicationController
       redirect_to new_user_item_path(current_user), alert: "次の商品の登録に失敗しました: #{error_messages.join(', ')}"
     end    
   end
-  
-  
-  
-  
 
   private
 

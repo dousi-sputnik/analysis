@@ -4,6 +4,9 @@ class AnalysisSessionsController < ApplicationController
     items = @analysis_session.items.order(sales: :desc)
     total_sales = items.sum(:sales)
     cumulative_sales = 0
+
+    # Clear existing analysis_results
+    @analysis_session.analysis_results.destroy_all
   
     items.each do |item|
       cumulative_sales += item.sales
