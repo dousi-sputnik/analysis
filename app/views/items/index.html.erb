@@ -1,3 +1,12 @@
 <h1>Your Items</h1>
 <%= link_to 'New Item', new_user_item_path(current_user) %>
-<%= link_to @analysis_session.title, analysis_session_path(@analysis_session) if @analysis_session.present? %>
+<h2>ABC分析一覧</h2>
+
+<% @analysis_sessions.each do |session| %>
+  <div>
+    <%= link_to truncate(session.title, length: 50), analysis_session_path(session) %>
+    <p><strong>作成日時:</strong> <%= session.created_at.strftime('%Y/%m/%d %H:%M') %></p>
+    <p><strong>説明文:</strong> <%= truncate(session.description, length: 50) %></p>
+    <%= link_to "削除", analysis_session_path(session), method: :delete, data: { confirm: "この分析セッションと関連するabc分析結果を削除してもよろしいですか?" } %>
+  </div>
+<% end %>

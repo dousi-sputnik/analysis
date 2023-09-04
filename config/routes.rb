@@ -10,5 +10,5 @@ Rails.application.routes.draw do
       end
     end
   end
-  resources :analysis_sessions, only: [:show]
+  resources :analysis_sessions, only: [:show, :destroy]
 end

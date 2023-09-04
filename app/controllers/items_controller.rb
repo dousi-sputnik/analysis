@@ -4,7 +4,7 @@ class ItemsController < ApplicationController
 
   def index
     @items = current_user.items.order(sales: :desc)
-    @analysis_session = current_user.analysis_sessions.last
+    @analysis_sessions = current_user.analysis_sessions.order(created_at: :desc)
   end
 
   def new
