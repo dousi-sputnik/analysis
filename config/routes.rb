@@ -10,9 +10,5 @@ Rails.application.routes.draw do
       end
     end
   end
-  resources :analysis_sessions, only: [:show] do
-    member do
-      get 'analysis'
-    end
-  end
+  resources :analysis_sessions, only: [:show]
 end

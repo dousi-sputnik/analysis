@@ -1,7 +1,7 @@
 wb = xlsx_package.workbook
 wb.add_worksheet(name: "ABC分析") do |sheet|
   sheet.add_row ["JANコード", "商品名", "売上高", "累計売上高", "累計売上割合", "分類"]
-  @analysis_session.each do |item|
+  @abc_items.each do |item|
     sheet.add_row [item[:jan_code], item[:product_name], item[:sales], item[:cumulative_sales], "#{item[:cumulative_percentage]}%", item[:classification]]
   end
 end
