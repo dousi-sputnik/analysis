@@ -25,3 +25,5 @@
     <% end %>
   </tbody>
 </table>
+
+<%= link_to 'Excelでダウンロード', analysis_analysis_session_path(@analysis_session, format: :xlsx) %>

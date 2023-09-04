@@ -4,6 +4,7 @@ class ItemsController < ApplicationController
 
   def index
     @items = current_user.items.order(sales: :desc)
+    @analysis_session = current_user.analysis_sessions.last
   end
 
   def new
@@ -34,91 +35,48 @@ class ItemsController < ApplicationController
     @item.destroy
     redirect_to user_items_url, notice: '商品を削除しました。'
   end
-
-  def analysis
-    @items = current_user.items.order(sales: :desc)
-    total_sales = @items.sum(:sales)
-    cumulative_sales = 0
-    @abc_items = []
-    
-    @items.each do |item|
-      cumulative_sales += item.sales
-      cumulative_percentage = (cumulative_sales.to_f / total_sales) * 100
-      if cumulative_percentage <= 70
-        item_classification = "A"
-      elsif cumulative_percentage <= 90
-        item_classification = "B"
-      else
-        item_classification = "C"
-      end
-
-      # ここで@abc_itemsにデータを追加します。
-      @abc_items << {
-        jan_code: item.jan_code,
-        product_name: item.product_name,
-        sales: item.sales,
-        cumulative_sales: cumulative_sales,
-        cumulative_percentage: cumulative_percentage,
-        classification: item_classification
-      }
-    end
-    
-    # 新しいAnalysisSessionを作成します。
-    analysis_session = current_user.analysis_sessions.create(
-      title: "分析結果: #{Time.now.strftime('%Y/%m/%d %H:%M')}", 
-      description: "このセッションの説明文を適切に設定します。"
-    )
-
-    # @abc_itemsに基づいてanalysis_resultsテーブルにデータを保存します。
-    @abc_items.each do |item_data|
-    # 以下の部分で、analysis_sessionに関連するanalysis_resultを作成します。
-      analysis_session.analysis_results.create(item_data)
-    end
-
-    # 適切なリダイレクトやフラッシュメッセージを設定します。
-    redirect_to user_path(current_user), notice: '分析が完了しました。'
-
-    respond_to do |format|
-      format.html
-      format.xlsx do
-        response.headers['Content-Disponsition'] = 'attachment; filename="abc_analysis.xlsx"'
-      end
-    end
-  end
   
-
   def create_bulk
+    analysis_session = current_user.analysis_sessions.new(title: params[:title], description: params[:description])
+  
+    unless analysis_session.save
+      redirect_to new_user_item_path(current_user), alert: analysis_session.errors.full_messages.join(", ")
+      return
+    end
+    
     bulk_data = params[:bulk_input]
     rows = bulk_data.split("\n")
     error_messages = []
-    success_count = 0
   
     # トランザクションを使用
     Item.transaction do
       rows.each_with_index do |row, index|
-        jan_code, product_name, sales_str = row.split("\t") # Split into three variables
-        sales = sales_str.to_i # Convert sales string to integer
+        jan_code, product_name, sales_str = row.split("\t")
+        sales = sales_str.to_i
         item = current_user.items.find_or_initialize_by(jan_code: jan_code)
         item.product_name = product_name
         item.sales = sales
         if item.save
-          success_count += 1
+          # Save related analysis_results as well
+          analysis_result = analysis_session.analysis_results.new(jan_code: jan_code, product_name: product_name, sales: sales)
+          unless analysis_result.save
+            error_messages << "行 #{index + 1} (JAN Code #{jan_code}): #{analysis_result.errors.full_messages.join(', ')}"
+          end
         else
-          Rails.logger.error("Failed to save item with JAN Code: #{jan_code}. Errors: #{item.errors.full_messages.join(', ')}")
           error_messages << "行 #{index + 1} (JAN Code #{jan_code}): #{item.errors.full_messages.join(', ')}"
         end
       end
   
-      # すべての保存が成功していない場合、トランザクションをロールバック
       raise ActiveRecord::Rollback unless error_messages.empty?
     end
   
     if error_messages.empty?
-      redirect_to analysis_path, notice: "#{success_count} 商品情報が作成されました"
+      redirect_to analysis_session_path(analysis_session), notice: "分析が完了しました。"
     else
       redirect_to new_user_item_path(current_user), alert: "次の商品の登録に失敗しました: #{error_messages.join(', ')}"
-    end
+    end    
   end
+  
   
   
   

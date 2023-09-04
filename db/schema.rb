@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_09_02_004214) do
+ActiveRecord::Schema.define(version: 2023_09_04_052133) do
 
   create_table "analysis_results", charset: "utf8mb3", force: :cascade do |t|
     t.bigint "user_id", null: false
@@ -65,6 +65,7 @@ ActiveRecord::Schema.define(version: 2023_09_02_004214) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "analysis_results", "analysis_sessions"
   add_foreign_key "analysis_results", "users"
   add_foreign_key "analysis_sessions", "users"
   add_foreign_key "items", "users"

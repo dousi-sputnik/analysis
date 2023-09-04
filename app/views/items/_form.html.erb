@@ -1,4 +1,10 @@
 <%= form_with url: create_bulk_user_items_path(current_user), local: true do |f| %>
+  <%= f.label :title, "ABC分析のタイトル" %>
+  <%= f.text_field :title, class: 'form-control mb-2' %>
+
+  <%= f.label :description, "説明" %>
+  <%= f.text_area :description, class: 'form-control mb-2', row: 5, placeholder: "分析に関する説明を記述してください" %>
+
   <div class="mb-3" %>
     <label for="bulk_input" class="form-label">Excelデータペーストエリア</label>
     <%= f.text_area :bulk_input, class: 'form-control', row: 100, placeholder: "こちらにExcel等のデータをコピー&ペーストしてください" %>

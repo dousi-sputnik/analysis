@@ -1,24 +1,3 @@
 <h1>Your Items</h1>
 <%= link_to 'New Item', new_user_item_path(current_user) %>
-<table>
-  <thead>
-    <tr>
-      <th>JANコード</th>
-      <th>商品名</th>
-      <th>売上高</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @items.each do |item| %>
-      <tr>
-        <td><%= item.jan_code %></td>
-        <td><%= item.product_name %></td>
-        <td><%= item.sales %></td>
-        <td><%= link_to 'Show', [item.user, item] %></td>
-        <td><%= link_to 'Edit', edit_user_item_path(item.user, item) %></td>
-        <td><%= link_to 'Destroy', [item.user, item], method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<%= link_to @analysis_session.title, analysis_session_path(@analysis_session) if @analysis_session.present? %>

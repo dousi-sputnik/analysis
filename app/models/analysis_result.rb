@@ -1,3 +1,3 @@
 class AnalysisResult < ApplicationRecord
-  belongs_to :user
+  belongs_to :analysis_session
 end

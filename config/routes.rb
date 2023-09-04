@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  get 'analysis_sessions/show'
   get 'home/index'
   devise_for :users
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
@@ -11,6 +10,9 @@ Rails.application.routes.draw do
       end
     end
   end
-  get '/analysis', to: 'items#analysis'
-  resources :analysis_sessions, only: [:show]
+  resources :analysis_sessions, only: [:show] do
+    member do
+      get 'analysis'
+    end
+  end
 end
