@@ -1,0 +1,27 @@
+<h2><%= @analysis_session.title %></h2>
+<p><%= @analysis_session.description %></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>JANコード</th>
+      <th>商品名</th>
+      <th>売上高</th>
+      <th>累計売上高</th>
+      <th>累計売上割合</th>
+      <th>分類</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @analysis_session.analysis_results.each do |result| %>
+      <tr>
+        <td><%= result.jan_code %></td>
+        <td><%= result.product_name %></td>
+        <td><%= result.sales %></td>
+        <td><%= result.cumulative_sales %></td>
+        <td><%= number_to_percentage(result.cumulative_percentage, precision: 2) %></td>
+        <td><%= result.classification %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

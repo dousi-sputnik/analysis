@@ -1749,9 +1749,6 @@ GEM
     websocket-driver (0.7.6)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
-    wicked_pdf (2.7.0)
-      activesupport
-    wkhtmltopdf-binary (0.12.6.6)
     xpath (3.2.0)
       nokogiri (~> 1.8)
     yard (0.9.34)
@@ -1794,11 +1791,9 @@ DEPENDENCIES
   web-console (>= 4.1.0)
   webdrivers
   webpacker (= 5.4.3)
-  wicked_pdf
-  wkhtmltopdf-binary
 
 RUBY VERSION
    ruby 3.0.4p208
 
 BUNDLED WITH
-   2.3.16
+   2.4.19

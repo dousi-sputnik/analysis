@@ -51,7 +51,7 @@ class ItemsController < ApplicationController
       else
         item_classification = "C"
       end
-      
+
       # ここで@abc_itemsにデータを追加します。
       @abc_items << {
         jan_code: item.jan_code,
@@ -63,21 +63,25 @@ class ItemsController < ApplicationController
       }
     end
     
+    # 新しいAnalysisSessionを作成します。
+    analysis_session = current_user.analysis_sessions.create(
+      title: "分析結果: #{Time.now.strftime('%Y/%m/%d %H:%M')}", 
+      description: "このセッションの説明文を適切に設定します。"
+    )
+
     # @abc_itemsに基づいてanalysis_resultsテーブルにデータを保存します。
     @abc_items.each do |item_data|
-      current_user.analysis_results.create(item_data)
+    # 以下の部分で、analysis_sessionに関連するanalysis_resultを作成します。
+      analysis_session.analysis_results.create(item_data)
     end
-    
+
+    # 適切なリダイレクトやフラッシュメッセージを設定します。
+    redirect_to user_path(current_user), notice: '分析が完了しました。'
+
     respond_to do |format|
       format.html
       format.xlsx do
         response.headers['Content-Disponsition'] = 'attachment; filename="abc_analysis.xlsx"'
-      end
-      format.pdf do
-        render pdf: "analysis",
-               layout: false,
-               template: 'items/analysis_pdf.erb',
-               encoding: 'UTF-8'
       end
     end
   end

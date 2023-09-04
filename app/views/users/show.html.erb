@@ -2,29 +2,6 @@
 <p>Email: <%= @user.email %></p>
 
 <h2>ABC分析結果</h2>
-<table>
-  <thead>
-    <tr>
-      <th>作成日</th>
-      <th>JANコード</th>
-      <th>商品名</th>
-      <th>売上高</th>
-      <th>累計売上高</th>
-      <th>累計売上割合</th>
-      <th>分類</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @analysis_results.each do |result| %>
-      <tr>
-        <td><%= result.created_at %></td>
-        <td><%= result.jan_code %></td>
-        <td><%= result.product_name %></td>
-        <td><%= result.sales %></td>
-        <td><%= result.cumulative_sales %></td>
-        <td><%= result.cumulative_percentage %></td>
-        <td><%= result.classification %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<% current_user.analysis_sessions.each do |session| %>
+  <%= link_to session.title, analysis_session_path(session) %><br>
+<% end %>

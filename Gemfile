@@ -51,8 +51,6 @@ group :development do
   gem 'devise'
   gem 'caxlsx'
   gem 'caxlsx_rails'
-  gem 'wicked_pdf'
-  gem 'wkhtmltopdf-binary'
 end
 
 group :test do

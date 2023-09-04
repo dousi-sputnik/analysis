@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_09_01_054812) do
+ActiveRecord::Schema.define(version: 2023_09_02_004214) do
 
   create_table "analysis_results", charset: "utf8mb3", force: :cascade do |t|
     t.bigint "user_id", null: false
@@ -22,7 +22,18 @@ ActiveRecord::Schema.define(version: 2023_09_01_054812) do
     t.string "classification"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "analysis_session_id", null: false
+    t.index ["analysis_session_id"], name: "index_analysis_results_on_analysis_session_id"
     t.index ["user_id"], name: "index_analysis_results_on_user_id"
+  end
+
+  create_table "analysis_sessions", charset: "utf8mb3", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "title"
+    t.text "description"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_analysis_sessions_on_user_id"
   end
 
   create_table "items", charset: "utf8mb3", force: :cascade do |t|
@@ -55,5 +66,6 @@ ActiveRecord::Schema.define(version: 2023_09_01_054812) do
   end
 
   add_foreign_key "analysis_results", "users"
+  add_foreign_key "analysis_sessions", "users"
   add_foreign_key "items", "users"
 end
