@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_09_04_065040) do
+ActiveRecord::Schema.define(version: 2023_09_04_115525) do
 
   create_table "analysis_results", charset: "utf8mb3", force: :cascade do |t|
     t.string "jan_code"
@@ -43,7 +43,7 @@ ActiveRecord::Schema.define(version: 2023_09_04_065040) do
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "analysis_session_id", null: false
     t.index ["analysis_session_id"], name: "index_items_on_analysis_session_id"
-    t.index ["jan_code"], name: "index_items_on_jan_code", unique: true
+    t.index ["jan_code", "analysis_session_id"], name: "index_items_on_jan_code_and_analysis_session_id", unique: true
     t.index ["user_id"], name: "index_items_on_user_id"
   end
 
