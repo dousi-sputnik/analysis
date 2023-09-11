@@ -4,13 +4,13 @@ class AnalysisSessionsController < ApplicationController
 
   def show
     @abc_items = @analysis_session.analysis_results
-  
+
     respond_to do |format|
       format.html
-      format.xlsx {
+      format.xlsx do
         response.headers['Content-Disposition'] = 'attachment; filename="abc_analysis.xlsx"'
         render xlsx: 'analysis', template: 'analysis_sessions/analysis'
-      }
+      end
     end
   end
 
@@ -28,4 +28,3 @@ class AnalysisSessionsController < ApplicationController
     @analysis_session = current_user.analysis_sessions.find(params[:id])
   end
 end
-

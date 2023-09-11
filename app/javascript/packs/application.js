@@ -8,7 +8,7 @@ import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 import "bootstrap"
-
+import 'stylesheets/devise.scss'
 import './application.js'
 import '../stylesheets/application.scss'
 
