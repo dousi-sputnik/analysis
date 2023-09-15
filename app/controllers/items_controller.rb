@@ -42,6 +42,11 @@ class ItemsController < ApplicationController
   end
 
   def create_bulk
+    unless params[:title].present? && params[:description].present?
+      redirect_to new_user_item_path(current_user), alert: "タイトルと説明は必須です。"
+      return
+    end
+
     analysis_session = current_user.analysis_sessions.new(title: params[:title], description: params[:description])
 
     unless analysis_session.save
@@ -51,7 +56,19 @@ class ItemsController < ApplicationController
     end
 
     bulk_data = params[:bulk_input]
+
+    unless bulk_data.present?
+      redirect_to new_user_item_path(current_user), alert: "一括入力データが提供されていません。"
+      return
+    end
+
     rows = bulk_data.split("\n")
+
+    if rows.size < 1 || rows.size > 100
+      redirect_to new_user_item_path(current_user), alert: "一括入力データは最低1行、最大100行までです。"
+      return
+    end
+
     error_messages = []
 
     # トランザクションを使用
