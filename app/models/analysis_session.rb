@@ -3,6 +3,9 @@ class AnalysisSession < ApplicationRecord
   has_many :items, dependent: :destroy
   has_many :analysis_results, dependent: :destroy
 
+  validates :title, presence: { message: "タイトルは必須です。" }
+  validates :description, presence: { message: "説明は必須です。" }
+
   def analysis!
     items = self.items.order(sales: :desc)
     total_sales = items.sum(:sales)

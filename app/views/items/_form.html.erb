@@ -1,6 +1,6 @@
-<%= form_with url: create_bulk_user_items_path(current_user), local: true do |f| %>
+<%= form_with url: create_bulk_user_items_path(current_user), local: false, format: :js do |f| %>
   <%= f.label :title, "ABC分析のタイトル" %>
-  <%= f.text_field :title, class: 'form-control mb-2' %>
+  <%= f.text_field :title, class: 'form-control mb-2', row: 1, placeholder: "タイトルを記述してください" %>
 
   <%= f.label :description, "説明" %>
   <%= f.text_area :description, class: 'form-control mb-2', row: 5, placeholder: "分析に関する説明を記述してください" %>
@@ -9,14 +9,6 @@
     <label for="bulk_input" class="form-label">Excelデータペーストエリア</label>
     <%= f.text_area :bulk_input, class: 'form-control', row: 100, placeholder: "こちらにExcel等のデータをコピー&ペーストしてください" %>
   </div>
-  <% if @items&.errors&.any? %>
-    <div class="alert alert-danger" role="alert">
-      <ul>
-        <% @items.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-  <%= f.submit '計算開始', class: 'btn btn-primary mt-2' %>
+  <%= render 'shared/error_messages', object: @item %>
+  <%= f.submit '出力', class: 'btn btn-primary mt-2' %>
 <% end %>

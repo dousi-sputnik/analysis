@@ -42,67 +42,40 @@ class ItemsController < ApplicationController
   end
 
   def create_bulk
-    unless params[:title].present? && params[:description].present?
-      redirect_to new_user_item_path(current_user), alert: "タイトルと説明は必須です。"
+    @analysis_session = current_user.analysis_sessions.build(title: params[:title], description: params[:description])
+  
+    if @analysis_session.invalid?
+      @item = current_user.items.build(analysis_session: @analysis_session)
+      handle_errors(@item, @analysis_session.errors.full_messages.join(", "))
       return
     end
 
-    analysis_session = current_user.analysis_sessions.new(title: params[:title], description: params[:description])
-
-    unless analysis_session.save
-      Rails.logger.debug("Failed to save analysis session: #{analysis_session.errors.full_messages}")
-      redirect_to new_user_item_path(current_user), alert: analysis_session.errors.full_messages.join(", ")
+    if params[:bulk_input].blank?
+      @item ||= current_user.items.build(analysis_session: @analysis_session)
+      handle_errors(@item, "Excelデータペーストエリアは空ではありませんか？")
       return
     end
 
-    bulk_data = params[:bulk_input]
-
-    unless bulk_data.present?
-      redirect_to new_user_item_path(current_user), alert: "一括入力データが提供されていません。"
+    error_messages_for_bulk_data = validate_bulk_data(params[:bulk_input])
+    unless error_messages_for_bulk_data.empty?
+      handle_errors(@item, error_messages_for_bulk_data.join(", "))
       return
     end
 
-    rows = bulk_data.split("\n")
-
-    if rows.size < 1 || rows.size > 100
-      redirect_to new_user_item_path(current_user), alert: "一括入力データは最低1行、最大100行までです。"
+    unless @analysis_session.save
+      handle_errors(@item, @analysis_session.errors.full_messages.join(", "))
       return
     end
 
-    error_messages = []
-
-    # トランザクションを使用
-    Item.transaction do
-      rows.each_with_index do |row, index|
-        data = row.split("\t")
-
-        # データが正しく分割されているか確認
-        unless data.length == 3
-          error_messages << "行 #{index + 1}: データが不正です。"
-          next
-        end
-
-        jan_code, product_name, sales_str = data
-        sales = sales_str.to_i
-        item = current_user.items.find_or_initialize_by(jan_code: jan_code)
-        item.product_name = product_name
-        item.sales = sales
-        item.analysis_session_id = analysis_session.id
-        unless item.save
-          error_messages << "行 #{index + 1} (JAN Code #{jan_code}): #{item.errors.full_messages.join(', ')}"
-        end
-      end
-
-      raise ActiveRecord::Rollback unless error_messages.empty?
-    end
-
+    error_messages = Item.create_from_bulk(params[:bulk_input], current_user, @analysis_session)
+  
     if error_messages.empty?
-      analysis_session.analysis!
-      redirect_to analysis_session_path(analysis_session), notice: "分析が完了しました。"
+      @analysis_session.analysis!
+      redirect_to analysis_session_path(@analysis_session), notice: "分析が完了しました。"
     else
-      redirect_to new_user_item_path(current_user), alert: "次の商品の登録に失敗しました: #{error_messages.join(', ')}"
+      handle_errors(@item, "次の商品の登録に失敗しました: #{error_messages.join(', ')}")
     end
-  end
+  end 
 
   private
 
@@ -112,5 +85,38 @@ class ItemsController < ApplicationController
 
   def items_params
     params.require(:item).permit(:jan_code, :product_name, :sales)
+  end
+
+  def handle_errors(item, message)
+    if item.nil?
+      respond_to do |format|
+        format.html { render :new, alert: message }
+        format.js { render js: "alert('#{j message}');" }
+      end
+    else
+      item.errors.add(:base, message)
+      respond_to do |format|
+        format.html { render :new }
+        format.js { render 'items/error', locals: { item: item }, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def validate_bulk_data(bulk_data)
+    rows = bulk_data.split("\n")
+    error_messages = []
+  
+    if rows.size < 1 || rows.size > 100
+      error_messages << "Excelデータは最低1行、最大100行までです。"
+    end
+  
+    rows.each_with_index do |row, index|
+      data = row.split("\t")
+      unless data.length == 3
+        error_messages << "Excelデータの行 #{index + 1} はデータが不正です。"
+      end
+    end
+  
+    error_messages
   end
 end
