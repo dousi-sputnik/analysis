@@ -58,6 +58,7 @@ class ItemsController < ApplicationController
 
     error_messages_for_bulk_data = validate_bulk_data(params[:bulk_input])
     unless error_messages_for_bulk_data.empty?
+      @item ||= current_user.items.build(analysis_session: @analysis_session)
       handle_errors(@item, error_messages_for_bulk_data.join(", "))
       return
     end
@@ -95,6 +96,7 @@ class ItemsController < ApplicationController
       end
     else
       item.errors.add(:base, message)
+      puts item.errors.full_messages
       respond_to do |format|
         format.html { render :new }
         format.js { render 'items/error', locals: { item: item }, status: :unprocessable_entity }

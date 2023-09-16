@@ -52,6 +52,7 @@ group :development do
   gem 'devise'
   gem 'caxlsx'
   gem 'caxlsx_rails'
+  gem 'mini_magick'
 end
 
 group :test do
