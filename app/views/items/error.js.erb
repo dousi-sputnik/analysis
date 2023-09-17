@@ -1,1 +1,5 @@
-alert("<%= escape_javascript(item.errors.full_messages.join(', ')) %>");
+<% if defined?(item) && item %>
+  alert("<%= escape_javascript(item.errors.full_messages.join(', ')) %>");
+<% else %>
+  alert("<%= escape_javascript(error_message) %>");
+<% end %>
