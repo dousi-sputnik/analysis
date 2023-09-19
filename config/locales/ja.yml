@@ -205,3 +205,48 @@ ja:
       long: "%Y/%m/%d %H:%M"
       short: "%m/%d %H:%M"
     pm: 午後
+  models:
+    analysis_result: 解析結果
+    analysis_session: 解析セッション
+    item: アイテム
+    user: ユーザー
+  fields:
+    analysis_result:
+      jan_code: JANコード
+      product_name: 商品名
+      sales: 売上
+      cumulative_sales: 累計売上
+      cumulative_percentage: 累計パーセンテージ
+      classification: 分類
+      created_at: 作成日
+      updated_at: 更新日
+      analysis_session_id: 解析セッションID
+    analysis_session:
+      user_id: ユーザーID
+      title: タイトル
+      description: 説明
+      created_at: 作成日
+      updated_at: 更新日
+    item:
+      user_id: ユーザーID
+      jan_code: JANコード
+      product_name: 商品名
+      sales: 売上
+      created_at: 作成日
+      updated_at: 更新日
+      analysis_session_id: 解析セッションID
+    user:
+      email: メール
+      encrypted_password: 暗号化されたパスワード
+      name: 名前
+      reset_password_token: リセットパスワードトークン
+      reset_password_sent_at: リセットパスワード送信日
+      remember_created_at: 作成を記憶
+      sign_in_count: サインイン回数
+      current_sign_in_at: 現在のサインイン日
+      last_sign_in_at: 最後のサインイン日
+      current_sign_in_ip: 現在のサインインIP
+      last_sign_in_ip: 最後のサインインIP
+      created_at: 作成日
+      updated_at: 更新日
+      admin: 管理者
