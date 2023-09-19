@@ -1,0 +1,54 @@
+#mainNav {
+  .container {
+    padding-left: 0 !important;
+  }
+
+  .navbar {
+    margin-left: 0 !important;
+  }
+
+  .navbar-brand {
+    margin-left: 0 !important;
+    padding-left: 0 !important;
+  }
+}
+
+.masthead {
+  min-height: 100vh;
+  padding-top: 10rem;
+  padding-bottom: calc(10rem - 4.5rem);
+  background: linear-gradient(to bottom, rgba(92, 77, 66, 0.8) 0%, rgba(92, 77, 66, 0.8) 100%);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  background-size: cover;
+}
+
+.masthead h1, .masthead .h1 {
+  font-size: 2.25rem;
+}
+
+.masthead .card {
+  border-radius: 15px;
+  backdrop-filter: blur(10px);
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+@media (min-width: 992px) {
+  .masthead {
+    padding-top: 4.5rem;
+    padding-bottom: 0;
+  }
+  .masthead p {
+    font-size: 1.15rem;
+  }
+  .masthead h1, .masthead .h1 {
+    font-size: 3rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  .masthead h1, .masthead .h1 {
+    font-size: 3.5rem;
+  }
+}
