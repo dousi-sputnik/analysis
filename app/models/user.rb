@@ -6,5 +6,5 @@ class User < ApplicationRecord
 
   has_many :analysis_sessions
   has_many :items
-  has_many :analysis_results
+  has_many :analysis_results, through: :analysis_sessions
 end

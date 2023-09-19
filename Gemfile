@@ -63,6 +63,7 @@ group :test do
   gem 'webdrivers'
   gem 'rspec-rails'
   gem 'factory_bot_rails'
+  gem 'faker'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
@@ -74,3 +75,7 @@ gem "aws-sdk", "~> 3.0"
 gem 'rails-i18n'
 gem 'devise-i18n'
 gem 'devise-i18n-views'
+
+# for admin
+gem 'rails_admin', '~> 3.0'
+gem 'cancancan'

@@ -44,6 +44,10 @@ GEM
       globalid (>= 0.3.6)
     activemodel (6.1.7.6)
       activesupport (= 6.1.7.6)
+    activemodel-serializers-xml (1.0.2)
+      activemodel (> 5.x)
+      activesupport (> 5.x)
+      builder (~> 3.1)
     activerecord (6.1.7.6)
       activemodel (= 6.1.7.6)
       activesupport (= 6.1.7.6)
@@ -1493,6 +1497,7 @@ GEM
       msgpack (~> 1.2)
     builder (3.2.4)
     byebug (11.1.3)
+    cancancan (3.5.0)
     capybara (3.39.2)
       addressable
       matrix
@@ -1531,6 +1536,8 @@ GEM
     factory_bot_rails (6.2.0)
       factory_bot (~> 6.2.0)
       railties (>= 5.0.0)
+    faker (3.2.1)
+      i18n (>= 1.8.11, < 2)
     ffi (1.15.5)
     globalid (1.1.0)
       activesupport (>= 5.0)
@@ -1542,6 +1549,18 @@ GEM
       activesupport (>= 5.0.0)
     jmespath (1.6.2)
     json (2.6.3)
+    kaminari (1.2.2)
+      activesupport (>= 4.1.0)
+      kaminari-actionview (= 1.2.2)
+      kaminari-activerecord (= 1.2.2)
+      kaminari-core (= 1.2.2)
+    kaminari-actionview (1.2.2)
+      actionview
+      kaminari-core (= 1.2.2)
+    kaminari-activerecord (1.2.2)
+      activerecord
+      kaminari-core (= 1.2.2)
+    kaminari-core (1.2.2)
     listen (3.8.0)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
@@ -1562,6 +1581,7 @@ GEM
     minitest (5.19.0)
     msgpack (1.7.2)
     mysql2 (0.5.5)
+    nested_form (0.3.2)
     net-imap (0.3.7)
       date
       net-protocol
@@ -1636,6 +1656,12 @@ GEM
     rails-i18n (7.0.8)
       i18n (>= 0.7, < 2)
       railties (>= 6.0.0, < 8)
+    rails_admin (3.1.2)
+      activemodel-serializers-xml (>= 1.0)
+      kaminari (>= 0.14, < 2.0)
+      nested_form (~> 0.3)
+      rails (>= 6.0, < 8)
+      turbo-rails (~> 1.0)
     railties (6.1.7.6)
       actionpack (= 6.1.7.6)
       activesupport (= 6.1.7.6)
@@ -1726,6 +1752,10 @@ GEM
     thor (1.2.2)
     tilt (2.2.0)
     timeout (0.4.0)
+    turbo-rails (1.4.0)
+      actionpack (>= 6.0.0)
+      activejob (>= 6.0.0)
+      railties (>= 6.0.0)
     turbolinks (5.2.1)
       turbolinks-source (~> 5.2)
     turbolinks-source (5.2.0)
@@ -1766,6 +1796,7 @@ DEPENDENCIES
   aws-sdk (~> 3.0)
   bootsnap (>= 1.4.4)
   byebug
+  cancancan
   capybara (>= 3.26)
   caxlsx
   caxlsx_rails
@@ -1773,6 +1804,7 @@ DEPENDENCIES
   devise-i18n
   devise-i18n-views
   factory_bot_rails
+  faker
   jbuilder (~> 2.7)
   listen (~> 3.3)
   mini_magick
@@ -1786,6 +1818,7 @@ DEPENDENCIES
   rails (~> 6.1.6)
   rails-erd
   rails-i18n
+  rails_admin (~> 3.0)
   rspec-rails
   rubocop-airbnb
   sass-rails (>= 6)
