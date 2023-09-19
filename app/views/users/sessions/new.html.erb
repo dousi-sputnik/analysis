@@ -1,8 +1,12 @@
+<% if flash[:alert] %>
+  <script>
+    alert('<%= flash[:alert] %>');
+  </script>
+<% end %>
 <div class="box2 box-inner">
   <h1>Log in</h1>
 
   <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-
     <div class="box-email">
       <label for="email">Email</label><br />
       <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
