@@ -5,16 +5,61 @@
       <div class="col-lg-8 align-self-end mb-5">
         <div class="card">
           <div class="card-body">
-            <h2 class="card-title">大きな見出し</h2>
-            <p class="card-text">詳細な解説が数行続く</p>
+            <h2 class="card-title text-start">ABC分析の理論</h2>
+            <p class="card-text text-start">ABC分析は、材料管理の領域で使用される在庫管理手法だ。この分析手法は、在庫を
+            「A」「B」「C」の3つのランクに分ける。</p>
+            <ul class="card-text text-start">
+              <li>
+                Aランクは厳格な管理と正確な記録が求められ、組織にとって非常に重要である。
+              </li></br>
+              <li>
+                BランクはA程の厳格さは求められないが、Cよりは重要であり、適度な管理が必要である。
+              </li></br>
+              <li>
+                Cランクは基本的にな管理と最小限な記録だけで十分である。
+              </li>
+            </ul>
+            <p class="card-text text-start">
+              これは組織の在庫全体の資産価値が等価ではないことを示している。具体的には、Aランクは全在庫商品の約
+              20%程で、全体の売上高の70%を占めるのが一般的だ。一方、Bランクは全商品の30%程で、売上高
+              が25%、そしてCランクは全商品の50%ほどを占めているが、売上高は5%しかないとされる。しかし、これらの
+              比率は常に固定されているわけではなく、その目的や基準に応じて変動する。
+            </p>
           </div>
         </div>
       </div>
       <div class="col-lg-8 align-self-end mb-5">
         <div class="card">
           <div class="card-body">
-            <h2 class="card-title">大きな見出し</h2>
-            <p class="card-text">詳細な解説が数行続く</p>
+            <h2 class="card-title text-start">ABC分析の実践</h2>
+            <p class="card-text text-start">
+              電子機器製造会社を例に考える。</br>
+              この会社ではAランクが全体商品在庫の20%を占める一方で、全体の売上高の60%を占める。Bランクは全商品の20%で、
+              総売上高の20%、最後にCランクは全商品の60%を占めるが、総売上高は20%しかない。つまり、Aランクは数量は少ないが、
+              その価値は非常に高いことがわかる。</br>
+              次に、全在庫商品の資産価値を均一に考えた場合と、ABCでランク分けした場合を比較してみる。
+            </p>
+            <ul class="card-text text-start">
+              <li>
+                資産価値を均一に考えた場合 : 全ての商品に同じような発注と管理が行われる。例えば会社はA B C全てのランクを
+                毎週オーダーすると仮定する。しかし、Aランクの価値が非常に高いことを考慮せず、均一に発注すると、Cランクの過剰
+                な在庫とAランクの不足が生じる可能性がある。これにより、Aランクの欠品による生産の遅延や、Cランクの在庫コストの
+                増加などの問題が生じる可能性がある。
+              </li></br>
+              </li>
+                ABC分析を利用した場合 : Aランクの高い資産価値を認識し、これに応じて発注の頻度や量を調整する。例えば、Aランク
+                は毎日のように少量をオーダーし、Cランクは月に1回オーダーするという方法が考えられる。これにより、Aランクの欠品の
+                リスクを大幅に減少させ、Cランクの過剰在庫を防ぐことができる。結果として、生産の効率が上がり、
+                在庫コストが削減される。
+              </li>
+            </ul>
+            <p class="card-text text-start">
+              この二つのアプローチからABC分析の利点が明確に分かる。</br>
+              在庫管理の分野でABC分析を利用することで、もっとも価値のあるAランクに焦点を絞ることができる。
+              これにより、管理の必要なBやCランクにかかるコストを節約することができる。さらに、不要な在庫を削減することで、
+              在庫の保持コストと欠品のリスクが低減し、結果として、キャッシュフローの改善が期待できる。また、資源
+              を適切に管理することで、販売の予測が向上し、コスト削減が達成されるとともに、企業の運営効率が大幅に向上する。
+            </p>
           </div>
         </div>
       </div>
@@ -23,20 +68,4 @@
 </div>
 
 <div class="container">
-  <h1>Welcome to ABC Analysis App</h1>
-  <p>ABC分析についての説明...</p>
-
-  <% if user_signed_in? %>
-    <p>
-      Welcome, <%= current_user.email %>!
-      <%= link_to 'Profile', user_path(current_user) %>
-      <%= link_to 'Items', user_items_path(current_user) %>
-      <%= link_to 'Logout', destroy_user_session_path, method: :delete, class: 'btn btn-danger' %>
-    </p>
-  <% else %>
-    <p>
-      <%= link_to 'Sign Up', new_user_registration_path, class: 'btn btn-primary' %>
-      <%= link_to 'Login', new_user_session_path, class: 'btn btn-secondary' %>
-    </p>
-  <% end %>
 </div>

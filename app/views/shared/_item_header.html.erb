@@ -8,6 +8,9 @@
         <ul class="navbar-nav ms-auto my-2 my-lg-0">
           <% if user_signed_in? %>
             <li class="nav-item">
+              <%= link_to "新規作成", new_user_item_path(current_user), class: "nav-link" %>
+            </li>
+            <li class="nav-item">
               <%= link_to "一覧", user_items_path(current_user), class: "nav-link" %>
             </li>
             <li class="nav-item">

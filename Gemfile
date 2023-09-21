@@ -79,3 +79,4 @@ gem 'devise-i18n-views'
 # for admin
 gem 'rails_admin', '~> 3.0'
 gem 'cancancan'
+gem 'dotenv-rails', groups: [:development, :test]
