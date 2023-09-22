@@ -10,6 +10,10 @@ Rails.application.routes.draw do
       end
     end
   end
-  resources :analysis_sessions, only: [:show, :destroy]
+  resources :analysis_sessions, only: [:show, :destroy] do
+    member do
+      get :show_item
+    end
+  end
   get '/users', to: redirect('/users/sign_up')
 end

@@ -1,6 +1,7 @@
 class AnalysisSessionsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_analysis_session, only: [:show, :destroy]
+  before_action :validate_jan_code, only: [:show_item]
 
   def show
     @abc_items = @analysis_session.analysis_results
@@ -11,6 +12,25 @@ class AnalysisSessionsController < ApplicationController
         response.headers['Content-Disposition'] = 'attachment; filename="abc_analysis.xlsx"'
         render xlsx: 'analysis', template: 'analysis_sessions/analysis'
       end
+    end
+  end
+
+  def show_item
+    app_id = ENV['YAHOO_APP_ID']
+    jan_code = params[:jan_code].strip
+    logger.debug "JAN Code: #{params[:jan_code]}"
+    base_url = "https://shopping.yahooapis.jp/ShoppingWebService/V3/itemSearch"
+    url = "#{base_url}?appid=#{app_id}&jan_code=#{jan_code}"
+    
+    response = HTTParty.get(url, format: :plain)
+    data = JSON.parse(response, symbolize_names: true)
+    
+    if data[:hits].present?
+      @item = data[:hits].first
+      render :show_item
+    else
+      @error_message = "商品情報が見つかりませんでした。"
+      render :error_page
     end
   end
 
@@ -26,5 +46,11 @@ class AnalysisSessionsController < ApplicationController
 
   def set_analysis_session
     @analysis_session = current_user.analysis_sessions.find(params[:id])
+  end
+
+  def validate_jan_code
+    unless params[:jan_code] =~ /\A\d+\z/
+      redirect_to analysis_session_path(id: params[:id]), alert: 'JANコードは半角数字のみ入力してください。'
+    end
   end
 end

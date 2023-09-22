@@ -1546,6 +1546,9 @@ GEM
     globalid (1.1.0)
       activesupport (>= 5.0)
     htmlentities (4.3.4)
+    httparty (0.21.0)
+      mini_mime (>= 1.0.0)
+      multi_xml (>= 0.5.2)
     i18n (1.14.1)
       concurrent-ruby (~> 1.0)
     jbuilder (2.11.5)
@@ -1584,6 +1587,7 @@ GEM
     mini_portile2 (2.8.4)
     minitest (5.19.0)
     msgpack (1.7.2)
+    multi_xml (0.6.0)
     mysql2 (0.5.5)
     nested_form (0.3.2)
     net-imap (0.3.7)
@@ -1810,6 +1814,7 @@ DEPENDENCIES
   dotenv-rails
   factory_bot_rails
   faker
+  httparty
   jbuilder (~> 2.7)
   listen (~> 3.3)
   mini_magick
