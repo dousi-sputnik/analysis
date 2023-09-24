@@ -75,6 +75,7 @@ class ItemsController < ApplicationController
   
     if error_messages.empty?
       @analysis_session.analysis!
+      @analysis_session.items.destroy_all
       redirect_to analysis_session_path(@analysis_session), notice: "分析が完了しました。"
     else
       @item ||= current_user.items.build(analysis_session: @analysis_session)

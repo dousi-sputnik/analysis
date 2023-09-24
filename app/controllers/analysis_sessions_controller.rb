@@ -1,7 +1,6 @@
 class AnalysisSessionsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_analysis_session, only: [:show, :destroy]
-  before_action :validate_jan_code, only: [:show_item]
+  before_action :set_analysis_session, only: [:show, :destroy, :show_item]
 
   def show
     @abc_items = @analysis_session.analysis_results
@@ -18,7 +17,10 @@ class AnalysisSessionsController < ApplicationController
   def show_item
     app_id = ENV['YAHOO_APP_ID']
     jan_code = params[:jan_code].strip
-    logger.debug "JAN Code: #{params[:jan_code]}"
+    if jan_code !~ /^\d+$/
+      flash.now[:alert] = 'JANコードは半角数字のみ入力してください。'
+      render :show and return
+    end
     base_url = "https://shopping.yahooapis.jp/ShoppingWebService/V3/itemSearch"
     url = "#{base_url}?appid=#{app_id}&jan_code=#{jan_code}"
     
@@ -46,11 +48,5 @@ class AnalysisSessionsController < ApplicationController
 
   def set_analysis_session
     @analysis_session = current_user.analysis_sessions.find(params[:id])
-  end
-
-  def validate_jan_code
-    unless params[:jan_code] =~ /\A\d+\z/
-      redirect_to analysis_session_path(id: params[:id]), alert: 'JANコードは半角数字のみ入力してください。'
-    end
   end
 end
