@@ -2,7 +2,7 @@ class User < ApplicationRecord
   # Include default devise modules without :validatable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable
-
+  scope :guests, -> { where(guest: true) }
   # Custom password validation
   VALID_PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[\d])\w{6,12}\z/
   
@@ -14,7 +14,7 @@ class User < ApplicationRecord
   validates :email, presence: true, uniqueness: true
   validates :encrypted_password, presence: true
   
-  has_many :analysis_sessions
+  has_many :analysis_sessions, dependent: :destroy
   has_many :items
   has_many :analysis_results, through: :analysis_sessions
 

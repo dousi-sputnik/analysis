@@ -36,3 +36,19 @@ li {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+
+.fixed-height {
+  height: auto;
+  object-fit: contain;
+  max-height: 300px;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-color: black;
+}
+
+.carousel-indicators button {
+  background-color: rgba($color: #000000, $alpha: 0.3) !important;
+}
+

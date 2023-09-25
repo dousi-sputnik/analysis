@@ -1,0 +1,34 @@
+<%= render 'shared/header' %>
+<div class="masthead" style="background-image: url(<%= asset_pack_path 'media/images/analysis.jpg' %>);">
+  <div class="container px-4 px-lg-5 h-100">
+    <div class="row gx-4 gx-lg-5 h-100 align-items-center justify-content-center text-center">
+      <div class="col-lg-8 align-self-end mb-5">
+        <div class="card">
+          <div class="card-body">
+            <h2 class="card-title text-start">プライバシーポリシー</h2>
+            <p class="card-text text-start">ABC分析は、材料管理の領域で使用される在庫管理手法だ。この分析手法は、在庫を
+            「A」「B」「C」の3つのランクに分ける。</p>
+            <ul class="card-text text-start">
+              <li>
+                Aランクは厳格な管理と正確な記録が求められ、組織にとって非常に重要である。
+              </li></br>
+              <li>
+                BランクはA程の厳格さは求められないが、Cよりは重要であり、適度な管理が必要である。
+              </li></br>
+              <li>
+                Cランクは基本的にな管理と最小限な記録だけで十分である。
+              </li>
+            </ul>
+            <p class="card-text text-start">
+              これは組織の在庫全体の資産価値が等価ではないことを示している。具体的には、Aランクは全在庫商品の約
+              20%程で、全体の売上高の70%を占めるのが一般的だ。一方、Bランクは全商品の30%程で、売上高
+              が25%、そしてCランクは全商品の50%ほどを占めているが、売上高は5%しかないとされる。しかし、これらの
+              比率は常に固定されているわけではなく、その目的や基準に応じて変動する。
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<%= render 'shared/footer' %>

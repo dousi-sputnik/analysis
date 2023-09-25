@@ -5,12 +5,14 @@ Rails.application.routes.draw do
   }
 
   devise_scope :user do
-    post 'users/guest_sign_in', to: 'sessions#new_guest'
+    post 'guest_login', to: 'sessions#new_guest'
   end
  
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   root 'home#index'
+  get 'policy', to: "home#policy"
   resources :users,  only: [:show, :edit, :update] do
+    delete :destroy_guest, on: :collection
     resources :items do
       collection do
         post :create_bulk
