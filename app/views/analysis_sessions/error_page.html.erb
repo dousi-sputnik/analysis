@@ -1,2 +1,20 @@
-<h2>エラー</h2>
-<p><%= @error_message %></p>
+<%= render 'shared/item_header' %>
+<div class="masthead" style="background-image: url(<%= asset_pack_path 'media/images/analysis.jpg' %>);">
+  <section class="py-5">
+    <div class="container px-4 px-lg-5 h-100">
+      <div class="card mt-5">
+        <div class="card-header text-center">
+          <h2>検索エラー</h2>
+        </div>
+        <div class="card-body">
+          <p><%= @error_message %></p>
+          <table class="table mb-4">
+            <tr class="text-center">
+              <td><%= link_to 'ABC分析表へ', analysis_session_path(@analysis_session), class: "btn btn-dark" %></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </sectopm>
+</div>

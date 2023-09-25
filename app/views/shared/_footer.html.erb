@@ -1,16 +1,16 @@
-<div class="container">
+<div class="container-fluid bg-dark text-white">
   <footer class="py-3 my-4">
     <ul class="nav justify-content-center border-bottom pb-3 mb-3">
-      <li class="nav-item"><%= link_to "Home", root_path, class: "nav-link px-2 text-body-secondary" %></li>
+      <li class="nav-item"><%= link_to "Home", root_path, class: "nav-link px-2 text-white" %></li> 
       <% if user_signed_in? %>
-        <li class="nav-item"><%= link_to "一覧", user_items_path(current_user), class: "nav-link px-2 text-body-secondary" %></li>
+        <li class="nav-item"><%= link_to "一覧", user_items_path(current_user), class: "nav-link px-2 text-white" %></li> 
         <% unless current_user.guest? %>
-          <li class="nav-item"><%= link_to "Profile", user_path(current_user), class: "nav-link px-2 text-body-secondary" %></li>
+          <li class="nav-item"><%= link_to "Profile", user_path(current_user), class: "nav-link px-2 text-white" %></li> 
         <% end %>
       <% end %>
-      <li class="nav-item"><%= link_to "プライバシーポリシー", policy_path, class: "nav-link px-2 text-body-secondary" %></li>
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">About</a></li>
+      <li class="nav-item"><%= link_to "個人情報保護方針及び免責事項", policy_path, class: "nav-link px-2 text-white" %></li> 
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-white">お問い合わせ</a></li>
     </ul>
-    <p class="text-center text-body-secondary"><%= Time.now.year %> ABCanalysis </p>
+    <p class="text-center text-white"><%= Time.now.year %> ABCanalysis </p>
   </footer>
 </div>

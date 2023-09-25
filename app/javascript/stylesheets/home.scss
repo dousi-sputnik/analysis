@@ -31,12 +31,6 @@ li {
   list-style: none;
 }
 
-.text-gradient {
-  background: -webkit-linear-gradient(315deg, #1e30f3 0%, #e21e80 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
 .fixed-height {
   height: auto;
   object-fit: contain;
@@ -51,4 +45,3 @@ li {
 .carousel-indicators button {
   background-color: rgba($color: #000000, $alpha: 0.3) !important;
 }
-

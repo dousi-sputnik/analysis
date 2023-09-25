@@ -1,39 +1,56 @@
 <%= render 'shared/item_header' %>
 <div class="masthead" style="background-image: url(<%= asset_pack_path 'media/images/analysis.jpg' %>);">
   <section class="py-5">
-    <div class="container px-5 mb-5">
-      <div class="text-center mb-5">
-          <h1 class="display-5 fw-bolder mb-0"><span class="text-gradient d-inline">分析表一覧</span></h1>
-      </div>
-      <div class="row gx-5 justify-content-center">
-        <div class="col-lg-11 col-xl-9 col-xxl-8">
-          <div class="card overflow-hidden shadow rounded-4 border-0 mb-5">
-            <div class="card-body p-0">
-              <div class="d-flex align-items-center">
-                <div class="p-5">
-                  <h2 class="fw-bolder">Project Name 1</h2>
-                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius at enim eum illum aperiam placeat esse? Mollitia omnis minima saepe recusandae libero, iste ad asperiores! Explicabo commodi quo itaque! Ipsam!</p>
-                </div>
-              </div>
+    <div class="container px-4 px-lg-5 h-100">
+      <div class="row gx-4 gx-lg-5 h-100 align-items-center justify-content-center text-center">
+        <div class="col-lg-8 align-self-end mb-4 text-center">
+          <div class="card">
+            <div class="card-header">
+              <h3>新規作成</h3>
+            </div>
+            <div class="card-body">
+              <%= link_to 'ABC分析開始', new_user_item_path(current_user), class: 'btn btn-dark btn-lg mb-4' %>
+              <hr>
+              <p>ABC分析作成の際の注意事項:</p>
+              <ul>
+                <li>項目1: 必ず*「Janコード(半角) (半角1つ分の空白)商品名(商品名に空白がある場合は<%= link_to "Home", root_path, class: "text-reset text-decoration-none" %>画面にある「ABC分析のやり方」を参考に消して下さい) (半角一つ分の空白)売上高(半角)」となるようにして下さい。</li>
+                <li>項目2: 事項の詳細</li>
+              </ul>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>  
-  <div class="container">
-    <h1>Your Items</h1>
-    <%= link_to 'New Item', new_user_item_path(current_user) %>
-    <h2>ABC分析一覧</h2>
-
-    <% @analysis_sessions.each do |session| %>
-      <div>
-        <%= link_to truncate(session.title, length: 50), analysis_session_path(session) %>
-        <p><strong>作成日時:</strong> <%= session.created_at.strftime('%Y/%m/%d %H:%M') %></p>
-        <p><strong>説明文:</strong> <%= truncate(session.description, length: 50) %></p>
-        <%= link_to "削除", analysis_session_path(session), method: :delete, data: { confirm: "この分析セッションと関連するabc分析結果を削除してもよろしいですか?" } %>
+      <div class="card mt-5">
+        <div class="card-header text-center">
+          <h2>ABC分析一覧</h2>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>タイトル</th>
+                  <th>作成日時</th>
+                  <th>分析説明</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @analysis_sessions.order(created_at: :desc).each do |session| %>
+                  <tr>
+                    <td><%= link_to truncate(session.title, length: 50), analysis_session_path(session) %></td>
+                    <td><%= session.created_at.strftime('%Y/%m/%d %H:%M') %></td>
+                    <td><%= truncate(session.description, length: 50) %></td>
+                    <td>
+                      <%= link_to "削除", analysis_session_path(session), method: :delete, data: { confirm: "この分析セッションと関連するabc分析結果を削除してもよろしいですか?" } %>
+                    </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
-    <% end %>
-    <%= link_to "Home", root_path %>
-  </div>
+    </div>
+  </section>
 </div>
