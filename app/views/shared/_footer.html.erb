@@ -5,11 +5,11 @@
       <% if user_signed_in? %>
         <li class="nav-item"><%= link_to "一覧", user_items_path(current_user), class: "nav-link px-2 text-white" %></li> 
         <% unless current_user.guest? %>
-          <li class="nav-item"><%= link_to "Profile", user_path(current_user), class: "nav-link px-2 text-white" %></li> 
+          <li class="nav-item"><%= link_to "Profile", user_path(current_user), class: "nav-link px-2 text-white" %></li>
+          <li class="nav-item"><%= link_to "お問い合わせ", new_contact_path( user_id: current_user.id ), class: "nav-link px-2 text-white" %></li>
         <% end %>
       <% end %>
       <li class="nav-item"><%= link_to "個人情報保護方針及び免責事項", policy_path, class: "nav-link px-2 text-white" %></li> 
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-white">お問い合わせ</a></li>
     </ul>
     <p class="text-center text-white"><%= Time.now.year %> ABCanalysis </p>
   </footer>

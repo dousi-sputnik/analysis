@@ -7,7 +7,9 @@ Rails.application.routes.draw do
   devise_scope :user do
     post 'guest_login', to: 'sessions#new_guest'
   end
- 
+
+  resources :contacts, only: [:new, :create]
+
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   root 'home#index'
   get 'policy', to: "home#policy"
@@ -25,4 +27,5 @@ Rails.application.routes.draw do
     end
   end
   get '/users', to: redirect('/users/sign_up')
+  get '/contacts', to: redirect('/')
 end
