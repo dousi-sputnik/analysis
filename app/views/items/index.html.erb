@@ -12,9 +12,9 @@
               <%= link_to 'ABC分析開始', new_user_item_path(current_user), class: 'btn btn-dark btn-lg mb-4' %>
               <hr>
               <p>ABC分析作成の際の注意事項:</p>
-              <ul>
-                <li>項目1: 必ず*「Janコード(半角) (半角1つ分の空白)商品名(商品名に空白がある場合は<%= link_to "Home", root_path, class: "text-reset text-decoration-none" %>画面にある「ABC分析のやり方」を参考に消して下さい) (半角一つ分の空白)売上高(半角)」となるようにして下さい。</li>
-                <li>項目2: 事項の詳細</li>
+              <ul class="text-start">
+                <li>項目1: 必ず「Janコード(半角) (半角1つ分の空白)商品名(商品名に空白がある場合は<%= link_to "トップ", root_path, class: "text-reset text-decoration-none" %>画面にある「ABC分析のやり方」を参考に消して下さい) (半角一つ分の空白)売上高(半角)」となるようにして下さい。</li>
+                <li>項目2: Janコードは一意(ダブらない)でお願いします。同じJanコードが複数ある場合、ABC分析が出力されません。</li>
               </ul>
             </div>
           </div>

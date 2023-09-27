@@ -13,19 +13,22 @@
             <h2 class="card-title text-start">ABC分析のやり方</h2>
             <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
               <div class="carousel-indicators">
-                <% (1..5).each_with_index do |_, index| %>
+                <% (1..8).each_with_index do |_, index| %>
                   <button type="button" data-bs-target="#carouselExampleControls" data-bs-slide-to="<%= index %>" class="<%= 'active' if index.zero? %>" aria-current="true" aria-label="Slide <%= index + 1 %>"></button>
                 <% end %>
               </div>
               <div class="carousel-inner">
                 <% image_descriptions = [
-                  "1の画像に関する説明文",
-                  "2の画像に関する説明文",
-                  "3の画像に関する説明文",
-                  "4の画像に関する説明文",
-                  "5の画像に関する説明文"
+                  "1. 上記のようにExcel(画像はNumbers)のJANコード、商品名、合計(売上高)のコピーしたい箇所を全て選択",
+                  "2. 編集を開く",
+                  "3. 編集にある検索枠をクリック。その後検索という選択肢があるのでそれをクリック。",
+                  "4. 入力欄が出てくるので、上の方に半角(必要なら半角の後に全角)で空白(スペースキー)を設ける。そうすると 1. の段階で選択していた箇所全ての半角の空白が出てくるので「すべて置き換え」をクリックする。そうすると半角空白箇所が範囲内で全て削除される。",
+                  "5. その後分析したい行をコピーする(最大100行まで)",
+                  "6. ログインしている(ゲストログインを含む)場合、サイト上部のメニューにABC分析という欄があるのでクリックするとABC分析専用画面に遷移する。そして新規作成欄にABC分析開始というボタンがあるのでクリックする。",
+                  "7. ABC分析表作成画面に遷移したら、タイトル(必須)、説明(必須)、を入力し、Excel入力ペーストエリアに 5. でコピーしたデータを貼り付ける。その際 JANコードと商品名、売上高の間にのみ空白があることを確かめる。その後ページの最下部にある「ABC分析表を出力」ボタンをクリック",
+                  "8. ABC分析表が出力されます。必要に応じて「Excelでダウンロード」ボタンをクリックすることで分析データをダウンロードすることができます。ページの下部にある「一覧表へ戻る」ボタンを押すことでABC分析画面へ戻ることができます。"
                 ] %>
-                <% (1..5).each_with_index do |i, index| %>
+                <% (1..8).each_with_index do |i, index| %>
                   <div class="carousel-item <%= 'active' if index.zero? %>">
                     <%= image_pack_tag "media/images/howto#{i}.png", class: "d-block w-100 fixed-height", alt: "How to #{i}" %>
                     <div class="home_description p-2 border-top">

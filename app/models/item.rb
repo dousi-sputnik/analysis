@@ -13,8 +13,8 @@ class Item < ApplicationRecord
   def validate_bulk_data
     rows = @bulk_data.split("\n")
 
-    if rows.size < 1 || rows.size > 100
-      errors.add(:bulk_data, "は最低1行、最大100行までです。")
+    if rows.size < 1 || rows.size > 500
+      errors.add(:bulk_data, "は最低1行、最大500行までです。")
     end
 
     rows.each_with_index do |row, index|
