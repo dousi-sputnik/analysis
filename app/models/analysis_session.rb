@@ -3,8 +3,8 @@ class AnalysisSession < ApplicationRecord
   has_many :items, dependent: :destroy
   has_many :analysis_results, dependent: :destroy
 
-  validates :title, presence: { message: "タイトルは必須です。" }
-  validates :description, presence: { message: "説明は必須です。" }
+  validates :title, presence: { message: "タイトルは必須です。" }, length: { maximum: 50, message: "タイトルは最大50字までです。"}
+  validates :description, presence: { message: "説明は必須です。" }, length: { maximum: 500, message: "説明文は最大500字までです。"}
 
   def analysis!
     items = self.items.order(sales: :desc)
