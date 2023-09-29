@@ -10,12 +10,12 @@
             <li class="nav-item">
               <%= link_to "新規作成", new_user_item_path(current_user), class: "nav-link" %>
             </li>
-            <li class="nav-item">
-              <%= link_to "ABC分析", user_items_path(current_user), class: "nav-link" %>
-            </li>
             <% unless current_user.guest? %>
               <li class="nav-item">
                 <%= link_to "プロフィール", user_path(current_user), class: "nav-link" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "ABC分析", user_items_path(current_user), class: "nav-link" %>
               </li>
             <% end %>
             <li class="nav-item">

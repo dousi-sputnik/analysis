@@ -23,10 +23,10 @@ class AnalysisSessionsController < ApplicationController
     end
     base_url = "https://shopping.yahooapis.jp/ShoppingWebService/V3/itemSearch"
     url = "#{base_url}?appid=#{app_id}&jan_code=#{jan_code}"
-    
+
     response = HTTParty.get(url, format: :plain)
     data = JSON.parse(response, symbolize_names: true)
-    
+
     if data[:hits].present?
       @item = data[:hits].first
       render :show_item

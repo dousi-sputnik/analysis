@@ -43,19 +43,19 @@ class ItemsController < ApplicationController
 
   def create_bulk
     @analysis_session = current_user.analysis_sessions.build(title: params[:title], description: params[:description])
-  
+
     if @analysis_session.invalid?
       @item = current_user.items.build(analysis_session: @analysis_session)
       handle_errors(@item, @analysis_session.errors.full_messages.join(", "))
       return
     end
-  
+
     if params[:bulk_input].blank?
       @item ||= current_user.items.build(analysis_session: @analysis_session)
       handle_errors(@item, "Excelデータペーストエリアは空ではありませんか？")
       return
     end
-  
+
     item_validator = Item.new(bulk_data: params[:bulk_input])
     item_validator.validate_bulk_data
     error_messages_for_bulk_data = item_validator.errors.full_messages
@@ -64,15 +64,15 @@ class ItemsController < ApplicationController
       handle_errors(@item, error_messages_for_bulk_data.join(", "))
       return
     end
-  
+
     unless @analysis_session.save
       @item ||= current_user.items.build(analysis_session: @analysis_session)
       handle_errors(@item, @analysis_session.errors.full_messages.join(", "))
       return
     end
-  
+
     error_messages = Item.create_from_bulk(params[:bulk_input], current_user, @analysis_session)
-  
+
     if error_messages.empty?
       @analysis_session.analysis!
       @analysis_session.items.destroy_all
@@ -81,7 +81,7 @@ class ItemsController < ApplicationController
       @item ||= current_user.items.build(analysis_session: @analysis_session)
       handle_errors(@item, "次の商品の登録に失敗しました: #{error_messages.join(', ')}")
     end
-  end  
+  end
 
   private
 
@@ -106,5 +106,5 @@ class ItemsController < ApplicationController
         format.js { render 'items/error', locals: { item: item }, status: :unprocessable_entity }
       end
     end
-  end  
+  end
 end
