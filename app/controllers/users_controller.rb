@@ -23,7 +23,7 @@ class UsersController < ApplicationController
       guest_user = current_user
       signed_out = (Devise.sign_out_all_scopes ? sign_out : sign_out(resource_name))
       guest_user.destroy
-      redirect_to root_path and return if signed_out
+      redirect_to root_path && return if signed_out
     else
       redirect_to user_items_path(current_user)
     end

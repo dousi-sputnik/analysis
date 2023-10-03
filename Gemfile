@@ -37,6 +37,8 @@ group :development, :test do
   gem 'pry-nav'
   gem 'rails-erd'
   gem 'annotate'
+  gem 'devise'
+  gem 'rails-controller-testing'
 end
 
 group :development do
@@ -49,7 +51,6 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'rubocop-airbnb'
-  gem 'devise'
   gem 'caxlsx'
   gem 'caxlsx_rails'
   gem 'mini_magick'

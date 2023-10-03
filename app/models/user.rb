@@ -22,7 +22,7 @@ class User < ApplicationRecord
   has_many :analysis_results, through: :analysis_sessions
 
   def timeout_in
-    guest? ? 10.minute : super
+    guest? ? 30.minutes : 1.hour
   end
 
   private
