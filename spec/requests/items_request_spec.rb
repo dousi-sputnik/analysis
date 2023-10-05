@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Items", type: :request do
+RSpec.describe "ItemsController", type: :request do
   let(:user) { create(:user) }
   before { sign_in user }
 

@@ -18,14 +18,14 @@ class AnalysisSessionsController < ApplicationController
     app_id = ENV['YAHOO_APP_ID']
     jan_code = params[:jan_code].strip
     if jan_code !~ /^\d+$/
-      flash.now[:alert] = 'JANコードは半角数字のみ入力してください。'
-      render :show && return
-    end
+      flash[:alert] = 'JANコードは半角数字のみ入力してください。'
+      render :show and return
+    end    
     base_url = "https://shopping.yahooapis.jp/ShoppingWebService/V3/itemSearch"
     url = "#{base_url}?appid=#{app_id}&jan_code=#{jan_code}"
 
-    response = HTTParty.get(url, format: :plain)
-    data = JSON.parse(response, symbolize_names: true)
+    http_response = HTTParty.get(url, format: :plain)
+    data = JSON.parse(http_response, symbolize_names: true)
 
     if data[:hits].present?
       @item = data[:hits].first

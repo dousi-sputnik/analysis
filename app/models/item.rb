@@ -14,13 +14,13 @@ class Item < ApplicationRecord
     rows = @bulk_data.split("\n")
 
     if rows.size < 1 || rows.size > 500
-      errors.add(:bulk_data, "は最低1行、最大500行までです。")
+      errors.add(:bulk_data, :row_limit_exceeded)
     end
 
     rows.each_with_index do |row, index|
       data = row.split("\t")
       unless data.length == 3
-        errors.add(:bulk_data, "の行 #{index + 1} はデータが不正です。")
+        errors.add(:bulk_data, :invalid_data_on_row, count: index + 1)
       end
     end
   end

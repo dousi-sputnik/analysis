@@ -15,7 +15,11 @@
             </tr>
           </tbody>
         </table>
-        
+        <% if flash[:alert] %>
+          <div class="alert alert-danger">
+            <%= flash[:alert] %>
+          </div>
+        <% end %>
         <%= form_with url: show_item_analysis_session_path(@analysis_session), method: :get, local: true do |form| %>
           <div class="input-group mb-3">
             <%= form.text_field :jan_code, class: 'form-control', placeholder: 'JANコードを入力', aria: { label: 'JANコード' } %>

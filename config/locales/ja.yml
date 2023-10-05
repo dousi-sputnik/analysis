@@ -7,6 +7,18 @@ ja:
         restrict_dependent_destroy:
           has_one: "%{record}が存在しているので削除できません"
           has_many: "%{record}が存在しているので削除できません"
+      models:
+        item:
+          attributes:
+            bulk_data:
+              invalid_data_on_row: "の行 %{count} はデータが不正です。"
+              row_limit_exceeded: "は最低1行、最大500行までです。"
+    attributes:
+      item:
+        bulk_data: "入力データ"
+      analysis_session:
+        title: "タイトル"
+        description: "説明"
   date:
     abbr_day_names:
     - 日
