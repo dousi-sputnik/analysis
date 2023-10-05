@@ -39,6 +39,7 @@ group :development, :test do
   gem 'annotate'
   gem 'devise'
   gem 'rails-controller-testing'
+  gem 'webmock'
 end
 
 group :development do

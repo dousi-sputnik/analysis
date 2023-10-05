@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'webmock/rspec'
 
 RSpec.describe AnalysisSessionsController, type: :request do
   let(:user) { create(:user) }
@@ -52,10 +53,25 @@ RSpec.describe AnalysisSessionsController, type: :request do
 
     context "with valid JAN code" do
       let(:valid_jan_code) { "1234567890123" }
-      let(:mocked_response_body) { { "hits": [{ "name": "dummy_item", "url": "http://yahoo.co.jp/some_product" }] } }
+      let(:mocked_response_body) do
+        {
+          "hits": [
+            {
+              "name": "dummy_item",
+              "url": "http://yahoo.co.jp/some_product",
+              "image": {
+                "medium": "http://path.to/image.jpg"
+              }
+            }
+          ]
+        }.to_json
+      end
 
       before do
-        allow(HTTParty).to receive(:get).and_return(mocked_response_body)
+        stub_request(:get, "https://shopping.yahooapis.jp/ShoppingWebService/V3/itemSearch").
+          with(query: { appid: ENV['YAHOO_APP_ID'], jan_code: valid_jan_code }).
+          to_return(body: mocked_response_body, status: 200, headers: { 'Content-Type' => 'application/json' })
+        
         get show_item_analysis_session_path(analysis_session.id, jan_code: valid_jan_code)
       end
 
