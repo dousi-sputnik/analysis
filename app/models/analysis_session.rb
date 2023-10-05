@@ -19,6 +19,7 @@ class AnalysisSession < ApplicationRecord
       items.each do |item|
         cumulative_sales += item.sales
         cumulative_percentage = (cumulative_sales.to_f / total_sales) * 100
+        cumulative_percentage = cumulative_percentage.round(2)
 
         if cumulative_percentage <= 70
           item_classification = "A"
