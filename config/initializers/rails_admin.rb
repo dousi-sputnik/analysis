@@ -5,7 +5,10 @@ RailsAdmin.config do |config|
 
   ## == Devise ==
   config.authenticate_with do
-    warden.authenticate! scope: :user
+    # warden.authenticate! scope: :user
+    unless current_user&.admin?
+      redirect_to main_app.root_path, alert: I18n.t('errors.messages.access_denied')
+    end
   end
   config.current_user_method(&:current_user)
 

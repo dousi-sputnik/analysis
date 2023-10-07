@@ -7,6 +7,7 @@ ja:
         restrict_dependent_destroy:
           has_one: "%{record}が存在しているので削除できません"
           has_many: "%{record}が存在しているので削除できません"
+        access_denied: "このページへのアクセス権限がありません。"
       models:
         item:
           attributes:
@@ -19,6 +20,9 @@ ja:
       analysis_session:
         title: "タイトル"
         description: "説明"
+      contact:
+        name: 'お名前'
+        content: 'お問合せ内容'
   date:
     abbr_day_names:
     - 日

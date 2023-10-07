@@ -15,7 +15,14 @@ class SessionsController < Devise::SessionsController
     password = [o[0].sample, o[1].sample, o[2].sample].shuffle[0...6].join
     password << (0...3).map { o[rand(o.length)].sample }.join
 
-    user = User.create!(guest: true, email: "guest_#{Time.zone.now.to_i}#{rand(100)}@example.com", password: password)
+    user = User.create!(
+      guest: true,
+      name: "ゲストユーザー",
+      email: "guest_#{Time.zone.now.to_i}#{rand(100)}@example.com",
+      password: password,
+      password_confirmation: password
+    )
+
     sign_in user
     redirect_to user_items_path(current_user), notice: 'ゲストユーザーとしてログインしました。'
   end

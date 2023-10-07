@@ -116,4 +116,36 @@ RSpec.describe "Users", type: :system do
       end
     end
   end
+
+  describe 'パスワード変更申請機能' do
+    before do
+      ActionMailer::Base.deliveries.clear
+      visit new_user_password_path
+    end
+
+    it 'メールによるパスワード変更の手順を完了する' do
+      fill_in 'user_email', with: user.email
+      click_button 'パスワードの変更を申請する'
+
+      expect(ActionMailer::Base.deliveries.size).to eq 1
+      mail = ActionMailer::Base.deliveries.last
+      expect(mail.to).to include user.email
+
+      body = mail.body.to_s
+      url = body.match(/href="([^"]+)"/)[1]
+      visit url
+
+      new_password = "New123"
+      fill_in 'user_password', with: new_password
+      fill_in 'user_password_confirmation', with: new_password
+      click_button 'Change my password'
+
+      visit new_user_session_path
+      fill_in 'user_email', with: user.email
+      fill_in 'user_password', with: new_password
+      click_button 'Log in'
+      expect(current_path).to eq root_path
+      expect(page).to have_content 'Logout'
+    end
+  end
 end

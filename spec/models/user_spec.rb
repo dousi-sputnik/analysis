@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  describe "バリデーション" do
+  describe "validate" do
     let(:user) { build(:user) }
 
     context "有効な情報が入力された場合" do
