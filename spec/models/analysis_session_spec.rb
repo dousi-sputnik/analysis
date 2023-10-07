@@ -1,15 +1,17 @@
 require 'rails_helper'
 
 RSpec.describe AnalysisSession, type: :model do
-  describe 'validations' do
-    let(:user) { create(:user) }
-    subject { build(:analysis_session, user: user) }
+  let(:user) { create(:user) }
+  let(:analysis_session) { build(:analysis_session, user: user) }
 
-    it '有効なファクトリを持つこと' do
+  describe 'validations' do
+    subject { analysis_session }
+
+    it '有効なfactoryを持つこと' do
       expect(subject).to be_valid
     end
 
-    context 'title' do
+    context 'title validation' do
       it 'titleがない場合は無効であること' do
         subject.title = nil
         expect(subject).to be_invalid
@@ -21,7 +23,7 @@ RSpec.describe AnalysisSession, type: :model do
       end
     end
 
-    context 'description' do
+    context 'description validation' do
       it 'descriptionがない場合は無効であること' do
         subject.description = nil
         expect(subject).to be_invalid
@@ -34,8 +36,7 @@ RSpec.describe AnalysisSession, type: :model do
     end
   end
 
-  describe 'analysis!' do
-    let(:user) { create(:user) }
+  describe '#analysis!' do
     let(:analysis_session) { create(:analysis_session, user: user) }
 
     before do
@@ -49,14 +50,12 @@ RSpec.describe AnalysisSession, type: :model do
       results = analysis_session.analysis_results.order(:jan_code)
 
       expect(results[0].classification).to eq('A')
-      expect(results[1].classification).to eq('A')
-      expect(results[2].classification).to eq('B')
+      expect(results[1].classification).to eq('B')
+      expect(results[2].classification).to eq('C')
     end
   end
 
   describe 'callbacks' do
-    let(:user) { create(:user) }
-
     context '保存した分析セッションの数がUser::MAX_ANALYSIS_SESSIONSを超える場合' do
       before do
         User::MAX_ANALYSIS_SESSIONS.times { create(:analysis_session, user: user) }

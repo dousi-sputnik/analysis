@@ -16,6 +16,8 @@ class User < ApplicationRecord
 
   validates :email, presence: true, uniqueness: true
   validates :encrypted_password, presence: true
+  validate :password_confirmation_matches?, if: :password_required?
+  validates :name, presence: true, length: { maximum: 50 }
 
   has_many :analysis_sessions, dependent: :destroy
   has_many :items
@@ -27,7 +29,13 @@ class User < ApplicationRecord
 
   private
 
+  def password_confirmation_matches?
+    if password != password_confirmation
+      errors.add(:password_confirmation, "が一致していません")
+    end
+  end
+
   def password_required?
-    password.present? || password_confirmation.present?
+    new_record? || password.present? || password_confirmation.present?
   end
 end

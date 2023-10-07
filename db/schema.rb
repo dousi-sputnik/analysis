@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_09_27_103351) do
+ActiveRecord::Schema.define(version: 2023_10_05_110307) do
 
   create_table "active_storage_attachments", charset: "utf8mb3", force: :cascade do |t|
     t.string "name", null: false
@@ -44,8 +44,8 @@ ActiveRecord::Schema.define(version: 2023_09_27_103351) do
     t.string "jan_code"
     t.string "product_name"
     t.integer "sales"
-    t.decimal "cumulative_sales", precision: 10
-    t.decimal "cumulative_percentage", precision: 10
+    t.decimal "cumulative_sales", precision: 10, scale: 2
+    t.decimal "cumulative_percentage", precision: 10, scale: 2
     t.string "classification"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

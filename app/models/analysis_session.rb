@@ -17,7 +17,7 @@ class AnalysisSession < ApplicationRecord
       analysis_results.destroy_all
 
       items.each do |item|
-        cumulative_sales += item.sales
+        cumulative_sales += item.sales.to_f
         cumulative_percentage = (cumulative_sales.to_f / total_sales) * 100
         cumulative_percentage = cumulative_percentage.round(2)
 

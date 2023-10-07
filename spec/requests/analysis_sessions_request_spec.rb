@@ -4,13 +4,11 @@ require 'webmock/rspec'
 RSpec.describe AnalysisSessionsController, type: :request do
   let(:user) { create(:user) }
   let(:analysis_session) { create(:analysis_session, user: user) }
-  let!(:analysis_result) { create(:analysis_result, analysis_session: analysis_session) }  # 追加
+  let!(:analysis_result) { create(:analysis_result, analysis_session: analysis_session) }
+  before { sign_in user }
 
   describe "GET #show" do
-    before do
-      sign_in user
-      get analysis_session_path(analysis_session.id)
-    end
+    before { get analysis_session_path(analysis_session.id) }
 
     it "HTTPのステータスコードが200で返ってくる" do
       expect(response).to have_http_status(:success)
@@ -28,14 +26,12 @@ RSpec.describe AnalysisSessionsController, type: :request do
       expect(response.body).to include(analysis_result.product_name)
     end
 
-    it "レスポンスに関連するanalysis_resultのsalesが含まれる" do
+    it "レスポンスに関連するanalysis_resultの売上高が含まれる" do
       expect(response.body).to include(analysis_result.sales.to_s)
     end
   end
 
   describe "DELETE #destroy" do
-    before { sign_in user }
-
     it "analysis_sessionを削除するとリダイレクトされる" do
       delete analysis_session_path(analysis_session.id)
       expect(response).to have_http_status(:redirect)
@@ -49,9 +45,7 @@ RSpec.describe AnalysisSessionsController, type: :request do
   end
 
   describe "GET #show_item" do
-    before { sign_in user }
-
-    context "with valid JAN code" do
+    context "JANコードにAPI関連の情報を含む場合" do
       let(:valid_jan_code) { "1234567890123" }
       let(:mocked_response_body) do
         {
@@ -71,7 +65,7 @@ RSpec.describe AnalysisSessionsController, type: :request do
         stub_request(:get, "https://shopping.yahooapis.jp/ShoppingWebService/V3/itemSearch").
           with(query: { appid: ENV['YAHOO_APP_ID'], jan_code: valid_jan_code }).
           to_return(body: mocked_response_body, status: 200, headers: { 'Content-Type' => 'application/json' })
-        
+
         get show_item_analysis_session_path(analysis_session.id, jan_code: valid_jan_code)
       end
 
@@ -91,9 +85,7 @@ RSpec.describe AnalysisSessionsController, type: :request do
     context "with invalid JAN code" do
       let(:invalid_jan_code) { "abc" }
 
-      before do
-        get show_item_analysis_session_path(analysis_session.id, jan_code: invalid_jan_code)
-      end
+      before { get show_item_analysis_session_path(analysis_session.id, jan_code: invalid_jan_code) }
 
       it "HTTPのステータスコードが200で返ってくる" do
         expect(response).to have_http_status(:success)

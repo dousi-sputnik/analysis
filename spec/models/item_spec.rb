@@ -4,7 +4,7 @@ RSpec.describe Item, type: :model do
   let(:user) { create(:user) }
   let(:analysis_session) { create(:analysis_session, user: user) }
 
-  describe 'バリデーション' do
+  describe 'validate' do
     context '入力データが有効なデータの場合' do
       it '有効なこと' do
         item = build(:item, user: user, analysis_session: analysis_session)
@@ -28,7 +28,7 @@ RSpec.describe Item, type: :model do
       end
     end
 
-    context '販売数が空の場合' do
+    context '売上高が空の場合' do
       it '無効であること' do
         item = build(:item, sales: nil, user: user, analysis_session: analysis_session)
         item.valid?
@@ -36,7 +36,7 @@ RSpec.describe Item, type: :model do
       end
     end
 
-    context '販売数が0未満の場合' do
+    context '売上高が0未満の場合' do
       it '無効であること' do
         item = build(:item, sales: -1, user: user, analysis_session: analysis_session)
         item.valid?

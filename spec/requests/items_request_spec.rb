@@ -2,13 +2,13 @@ require 'rails_helper'
 
 RSpec.describe "ItemsController", type: :request do
   let(:user) { create(:user) }
+  let!(:analysis_session) { create(:analysis_session, user: user) }
+  let!(:items) { create_list(:item, 5, user: user, analysis_session: analysis_session) }
+
   before { sign_in user }
 
   describe "GET /index" do
     context "ユーザーがanalysis_sessionsとitemsを持っている時" do
-      let!(:analysis_session) { create(:analysis_session, user: user) }
-      let!(:items) { create_list(:item, 5, user: user, analysis_session: analysis_session) }
-
       it "成功したレスポンスを返す" do
         get user_items_path(user)
         expect(response).to be_successful
@@ -26,6 +26,8 @@ RSpec.describe "ItemsController", type: :request do
     end
 
     context "ユーザーがanalysis_sessionsを持っていない時" do
+      before { analysis_session.destroy }
+
       it "成功したレスポンスを返す" do
         get user_items_path(user)
         expect(response).to be_successful
@@ -35,8 +37,6 @@ RSpec.describe "ItemsController", type: :request do
 
   describe "GET /new" do
     context "ユーザーがanalysis_sessionsを持っている時" do
-      let!(:analysis_session) { create(:analysis_session, user: user) }
-
       it "成功したレスポンスを返す" do
         get new_user_item_url(user_id: user.id)
         expect(response).to be_successful
@@ -44,6 +44,8 @@ RSpec.describe "ItemsController", type: :request do
     end
 
     context "ユーザーがanalysis_sessionsを持っていない時" do
+      before { analysis_session.destroy }
+
       it "アラートと共に成功したレスポンスを返す" do
         get new_user_item_url(user_id: user.id)
         expect(response).to be_successful
@@ -72,7 +74,7 @@ RSpec.describe "ItemsController", type: :request do
       it "新しいanalysis_sessionを作成せず、newアクションに戻る" do
         expect do
           post create_bulk_user_items_url(user_id: user.id),
-params: { title: "title", description: "description", bulk_input: "" }
+               params: { title: "title", description: "description", bulk_input: "" }
         end.not_to change(AnalysisSession, :count)
         expect(response).to render_template(:new)
       end
