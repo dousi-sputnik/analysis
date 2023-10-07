@@ -12,7 +12,7 @@ RSpec.describe "Users", type: :request do
 
   describe "POST /users" do
     context "有効なデータを送信した場合" do
-      let(:valid_params) { { user: { email: "test@example.com", password: "Password1", password_confirmation: "password" } } }
+      let(:valid_params) { { user: { name: "テストユーザー", email: "test@example.com", password: "Password1", password_confirmation: "Password1" } } }
 
       it "ユーザーを新規登録できる" do
         expect {
