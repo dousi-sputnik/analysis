@@ -1,85 +1,26 @@
+# Use the latest 2.1 version of CircleCI pipeline process engine.
+# See: https://circleci.com/docs/configuration-reference
 version: 2.1
 
+# Define a job to be invoked later in a workflow.
+# See: https://circleci.com/docs/configuration-reference/#jobs
 jobs:
-  rspec:
-    working_directory: ~/abc_analysis
+  say-hello:
+    # Specify the execution environment. You can specify an image from Docker Hub or use one of our convenience images from CircleCI's Developer Hub.
+    # See: https://circleci.com/docs/configuration-reference/#executor-job
     docker:
-      - image: cimg/ruby:3.0.4
-    resource_class: small
+      - image: cimg/base:stable
+    # Add steps to the job
+    # See: https://circleci.com/docs/configuration-reference/#steps
     steps:
       - checkout
-      - setup_remote_docker:
-          version: 20.10.14
       - run:
-          name: Setup environment variable
-          command: |
-            echo "export COMPOSE_FILE=docker-compose.ci.yml" >> $BASH_ENV
-      - run:
-          name: Start containers and verify it is working
-          command: |
-            set -x
-            docker-compose up -d
-            docker exec abc_analysis_app curl -4 --retry 10 --retry-delay 3 --retry-connrefused http://localhost:3000
-      - run:
-          name: Setup database
-          command: |
-            docker-compose exec web bash -c 'yes n | bundle exec rails db:migrate db:seed'
-      - run:
-          name: Run rspec
-          command: docker-compose exec web rspec
+          name: "Say hello"
+          command: "echo Hello, World!"
 
-  rubocop:
-    working_directory: ~/abc_analysis
-    docker:
-      - image: cimg/ruby:3.0.4
-    resource_class: small
-    steps:
-      - checkout
-      - restore_cache:
-          keys:
-            - gemfiles-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
-            - gemfiles-{{ .Branch }}-
-            - gemfiles-master-
-      - run: bundle config --local path vendor/bundle
-      - run:
-          name: bundle install
-          command: bundle check || bundle install --jobs=8 --clean
-      - run:
-          name: Run rubocop
-          command: bundle exec rubocop --parallel
-      - save_cache:
-          key: gemfiles-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
-          paths:
-            - vendor/bundle
-
-  heroku_deploy:
-    working_directory: ~/abc_analysis
-    docker:
-      - image: sue445/heroku-cli
-    resource_class: small
-    steps:
-      - checkout
-      - build-tools/install-ci-tools
-      - jq/install
-      - run:
-          name: Deploy
-          command: git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git HEAD:master
-      - run:
-          name: Run post-deploy tasks
-          command: |
-            heroku run bin/rails db:migrate -a $HEROKU_APP_NAME
-
-orbs:
-  build-tools: circleci/build-tools@2.6.3
-  jq: circleci/jq@1.9.1
-
+# Orchestrate jobs using workflows
+# See: https://circleci.com/docs/configuration-reference/#workflows
 workflows:
-  version: 2.1
-  build:
+  say-hello-workflow:
     jobs:
-      - rspec
-      - rubocop
-      - heroku_deploy:
-          requires:
-            - rspec
-            - rubocop
+      - say-hello
