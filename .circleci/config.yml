@@ -4,7 +4,7 @@ jobs:
   rspec:
     working_directory: ~/abc_analysis
     docker:
-      - image: cimg/ruby:3.0.4
+      - image: cimg/ruby:3.2.2
     resource_class: small
     steps:
       - checkout
