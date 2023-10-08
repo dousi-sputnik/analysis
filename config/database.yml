@@ -52,6 +52,5 @@ test:
 #
 production:
   <<: *default
-  database: abc_analysis_production
-  username: abc_analysis
-  password: <%= ENV['ABC_ANALYSIS_DATABASE_PASSWORD'] %>
+  database: <%= ENV['MYSQL_DATABASE'] %>
+  url: <%= ENV['DATABASE_URL'] %>

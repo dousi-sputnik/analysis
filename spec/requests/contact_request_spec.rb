@@ -11,15 +11,15 @@ RSpec.describe "Contacts", type: :request do
   describe "POST /contacts" do
     context "有効なデータを送信した場合" do
       it "問い合わせが正常に作成される" do
-        expect {
+        expect do
           post contacts_path, params: contact_params
-        }.to change(Contact, :count).by(1)
+        end.to change(Contact, :count).by(1)
       end
 
       it "メールが送信される" do
-        expect {
+        expect do
           post contacts_path, params: contact_params
-        }.to change { ActionMailer::Base.deliveries.size }.by(1)
+        end.to change { ActionMailer::Base.deliveries.size }.by(1)
 
         mail = ActionMailer::Base.deliveries.last
         expect(mail.subject).to include("お問い合わせについて")
@@ -36,15 +36,15 @@ RSpec.describe "Contacts", type: :request do
       let(:invalid_contact_params) { { contact: { name: "", content: "" } } }
 
       it "問い合わせが作成されない" do
-        expect {
+        expect do
           post contacts_path, params: invalid_contact_params
-        }.not_to change(Contact, :count)
+        end.not_to change(Contact, :count)
       end
 
       it "メールが送信されない" do
-        expect {
+        expect do
           post contacts_path, params: invalid_contact_params
-        }.not_to change { ActionMailer::Base.deliveries.size }
+        end.not_to change { ActionMailer::Base.deliveries.size }
       end
 
       it "エラーが表示される" do

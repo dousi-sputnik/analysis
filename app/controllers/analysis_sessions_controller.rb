@@ -19,8 +19,9 @@ class AnalysisSessionsController < ApplicationController
     jan_code = params[:jan_code].strip
     if jan_code !~ /^\d+$/
       flash[:alert] = 'JANコードは半角数字のみ入力してください。'
-      render :show and return
-    end    
+      render :show
+      return
+    end
     base_url = "https://shopping.yahooapis.jp/ShoppingWebService/V3/itemSearch"
     url = "#{base_url}?appid=#{app_id}&jan_code=#{jan_code}"
 

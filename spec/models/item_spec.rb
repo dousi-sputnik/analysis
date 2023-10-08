@@ -76,12 +76,12 @@ RSpec.describe Item, type: :model do
     context 'bulk_dataの各行が3つのタブ区切りデータを持つ場合' do
       it '正しくItemを作成すること' do
         bulk_data = "4900000000001\t商品A\t1000\n4900000000002\t商品B\t2000"
-        expect {
+        expect do
           Item.create_from_bulk(bulk_data, user, analysis_session)
-        }.to change(Item, :count).by(2)
+        end.to change(Item, :count).by(2)
       end
     end
-  
+
     context '不正なデータが含まれる場合' do
       it 'エラーメッセージを返すこと' do
         bulk_data = "4900000000001\t商品A\t1000\n4900000000002\t商品B"
@@ -89,10 +89,10 @@ RSpec.describe Item, type: :model do
         expect(errors).to include("行 2: データが不正です。")
       end
     end
-  
+
     context '既存のJANコードが含まれる場合' do
       let!(:existing_item) { create(:item, jan_code: "4900000000001", user: user, analysis_session: analysis_session) }
-  
+
       it '更新されること' do
         bulk_data = "4900000000001\t商品C\t1500"
         Item.create_from_bulk(bulk_data, user, analysis_session)
@@ -101,7 +101,7 @@ RSpec.describe Item, type: :model do
         expect(existing_item.sales).to eq(1500)
       end
     end
-  
+
     context '保存に失敗するデータが含まれる場合' do
       it 'エラーメッセージを返すこと' do
         bulk_data = "4900000000001\t\t1000"

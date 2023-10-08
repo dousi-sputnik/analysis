@@ -54,7 +54,10 @@ RSpec.describe User, type: :model do
     end
 
     context "passwordとpassword_confirmationが不一致の場合" do
-      before { user.password = "Password1"; user.password_confirmation = "Password2" }
+      before do
+        user.password = "Password1"
+        user.password_confirmation = "Password2"
+      end
 
       it "ユーザーが無効になる" do
         expect(user).not_to be_valid

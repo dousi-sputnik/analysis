@@ -6,9 +6,7 @@ RSpec.describe "Homes", type: :request do
   describe "GET /" do
     context "未ログインの場合" do
       it "ゲストログインボタンをクリックするとabc_analysisページに遷移する" do
-
       end
     end
   end
-
 end

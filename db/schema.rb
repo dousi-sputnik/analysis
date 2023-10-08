@@ -50,7 +50,6 @@ ActiveRecord::Schema.define(version: 2023_10_05_110307) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "analysis_session_id", null: false
-    t.string "yahoo_url"
     t.index ["analysis_session_id"], name: "index_analysis_results_on_analysis_session_id"
   end
 
@@ -98,10 +97,6 @@ ActiveRecord::Schema.define(version: 2023_10_05_110307) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "admin", default: false
-    t.string "confirmation_token"
-    t.datetime "confirmed_at"
-    t.datetime "confirmation_sent_at"
-    t.string "unconfirmed_email"
     t.boolean "guest", default: false, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

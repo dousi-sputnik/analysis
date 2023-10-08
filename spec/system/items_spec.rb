@@ -5,7 +5,7 @@ RSpec.describe "Items", type: :system do
   let!(:analysis_session) { create(:analysis_session, user: user) }
   let!(:items) { create_list(:item, 5, user: user, analysis_session: analysis_session) }
   let(:valid_bulk_input) { items.map { |item| "#{item.jan_code}\t#{item.product_name}\t#{item.sales}" }.join("\n") }
-  let!(:analysis_results) do 
+  let!(:analysis_results) do
     items.map do |item|
       create(:analysis_result, analysis_session: analysis_session, jan_code: item.jan_code)
     end
@@ -34,7 +34,7 @@ RSpec.describe "Items", type: :system do
         visit analysis_session_path(AnalysisSession.last.id)
         expect(page).to have_content('テストタイトル')
         expect(page).to have_content('これはテストです。')
-        
+
         analysis_results.each do |result|
           expect(page).to have_content(result.jan_code)
           expect(page).to have_content(result.product_name)

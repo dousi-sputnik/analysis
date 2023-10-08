@@ -38,9 +38,9 @@ RSpec.describe AnalysisSessionsController, type: :request do
     end
 
     it "analysis_sessionを削除するとデータが減少する" do
-      expect {
+      expect do
         delete analysis_session_path(analysis_session.id)
-      }.to change(AnalysisSession, :count).by(-1)
+      end.to change(AnalysisSession, :count).by(-1)
     end
   end
 
@@ -54,16 +54,16 @@ RSpec.describe AnalysisSessionsController, type: :request do
               "name": "dummy_item",
               "url": "http://yahoo.co.jp/some_product",
               "image": {
-                "medium": "http://path.to/image.jpg"
-              }
-            }
-          ]
+                "medium": "http://path.to/image.jpg",
+              },
+            },
+          ],
         }.to_json
       end
 
       before do
         stub_request(:get, "https://shopping.yahooapis.jp/ShoppingWebService/V3/itemSearch").
-          with(query: { appid: ENV['YAHOO_APP_ID'], jan_code: valid_jan_code }).
+          with(query: { appid: "dummy_app_id", jan_code: valid_jan_code }).
           to_return(body: mocked_response_body, status: 200, headers: { 'Content-Type' => 'application/json' })
 
         get show_item_analysis_session_path(analysis_session.id, jan_code: valid_jan_code)

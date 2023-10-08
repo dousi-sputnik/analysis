@@ -1854,7 +1854,7 @@ DEPENDENCIES
   webpacker (= 5.4.3)
 
 RUBY VERSION
-   ruby 3.0.4p208
+   ruby 3.0.6p216
 
 BUNDLED WITH
-   2.4.19
+   2.4.20

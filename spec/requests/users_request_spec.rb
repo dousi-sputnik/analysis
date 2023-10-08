@@ -12,12 +12,14 @@ RSpec.describe "Users", type: :request do
 
   describe "POST /users" do
     context "有効なデータを送信した場合" do
-      let(:valid_params) { { user: { name: "テストユーザー", email: "test@example.com", password: "Password1", password_confirmation: "Password1" } } }
+      let(:valid_params) do
+        { user: { name: "テストユーザー", email: "test@example.com", password: "Password1", password_confirmation: "Password1" } }
+      end
 
       it "ユーザーを新規登録できる" do
-        expect {
+        expect do
           post user_registration_path, params: valid_params
-        }.to change(User, :count).by(1)
+        end.to change(User, :count).by(1)
       end
 
       it "ユーザーのプロフィールページにリダイレクトされる" do
@@ -30,9 +32,9 @@ RSpec.describe "Users", type: :request do
       let(:invalid_params) { { user: { email: "", password: "password", password_confirmation: "password" } } }
 
       it "ユーザーを新規登録できない" do
-        expect {
+        expect do
           post user_registration_path, params: invalid_params
-        }.not_to change(User, :count)
+        end.not_to change(User, :count)
       end
 
       it "エラーが表示される" do
