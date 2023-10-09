@@ -2,7 +2,7 @@ class User < ApplicationRecord
   MAX_ANALYSIS_SESSIONS = 5
   # Include default devise modules without :validatable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :timeoutable
+         :recoverable, :rememberable, :timeoutable, :confirmable
   scope :guests, -> { where(guest: true) }
   # Custom password validation
   VALID_PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[\d])\w{6,12}\z/
