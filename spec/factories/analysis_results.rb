@@ -7,6 +7,5 @@ FactoryBot.define do
     cumulative_sales { 10000.0 }
     cumulative_percentage { 10.0 }
     classification { "A" }
-    yahoo_url { "http://yahoo.co.jp/some_product" }
   end
 end

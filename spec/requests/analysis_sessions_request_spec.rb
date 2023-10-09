@@ -63,7 +63,7 @@ RSpec.describe AnalysisSessionsController, type: :request do
 
       before do
         stub_request(:get, "https://shopping.yahooapis.jp/ShoppingWebService/V3/itemSearch").
-          with(query: { appid: "dummy_app_id", jan_code: valid_jan_code }).
+          with(query: { appid: ENV["YAHOO_APP_ID"], jan_code: valid_jan_code }).
           to_return(body: mocked_response_body, status: 200, headers: { 'Content-Type' => 'application/json' })
 
         get show_item_analysis_session_path(analysis_session.id, jan_code: valid_jan_code)
