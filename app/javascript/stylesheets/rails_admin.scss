@@ -1,6 +1,7 @@
+@use 'sass:math';
 @import "rails_admin/src/rails_admin/styles/base";
 
-$fa-fw-width: calc(20em / 16);
-$fa-lg-font-size: calc(4em / 3);
-$fa-lg-line-height: calc(3em / 4);
-$fa-li-margin-left: calc(#{$fa-li-width} * 5 / 4);
+$fa-fw-width: math.div(20em, 16);
+$fa-lg-font-size: math.div(4em, 3);
+$fa-lg-line-height: math.div(3em, 4);
+$fa-li-margin-left: math.div($fa-li-width * 5, 4);
