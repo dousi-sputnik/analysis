@@ -1,7 +1,8 @@
 # ABCanalysis
 
 # URL
-![image](https://github.com/dousi-sputnik/analysis/files/12853664/erd.png)
+<img width="1051" alt="スクリーンショット 2023-10-10 15 56 26" src="https://github.com/dousi-sputnik/analysis/assets/97434344/f3325d12-d134-4942-99c3-b3cffff95b5c">
+
 
 # ER図
 ![image]
