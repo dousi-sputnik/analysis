@@ -1,24 +1,12 @@
 # ABCanalysis
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+URL
 
-Things you may want to cover:
+# 概要
+当サイトはABC分析に基づいた商品在庫管理を容易にするためのシステムを提供します。
+具体的には以下のことが可能です。
+  1. Excel(numbersなど)のシートからコピー&ペーストすることで、バラバラの情報を売上高の高い順から降順に出力されます。
+  2. 出力したABC分析はExcel形式でダウンロード可能です。
+  3. 最大500行まで入力することができます。またABC分析表の保存も最大5つまで可能で、ネット環境があればいつでも結果を確認することができます。
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+使用技術
