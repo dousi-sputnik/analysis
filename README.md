@@ -1,7 +1,7 @@
 # ABCanalysis
 
 # URL
-![image](https://github.com/dousi-sputnik/analysis/files/12853664/erd.pdf)
+![image](https://github.com/dousi-sputnik/analysis/files/12853664/erd.png)
 
 # ER図
 ![image]
