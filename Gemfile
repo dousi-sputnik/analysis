@@ -54,6 +54,7 @@ group :development do
   gem 'caxlsx'
   gem 'caxlsx_rails'
   gem 'mini_magick'
+  gem "rails-erd"
 end
 
 group :test do
