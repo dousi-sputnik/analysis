@@ -2,6 +2,9 @@
 
 # URL
 
+# ER図
+[erd.pdf](https://github.com/dousi-sputnik/analysis/files/12853617/erd.pdf)
+
 # 概要
 当サイトはABC分析に基づいた商品在庫管理を容易にするためのシステムを提供します。
 具体的には以下のことが可能です。
@@ -17,6 +20,7 @@
  ・ Puma
  ・ AWS S3
  ・ Docker/Docker-compose
+
  ・ CircleCI CI/CD
  ・ RSpec
 　　・ Yahoo! JAPAN Web API
