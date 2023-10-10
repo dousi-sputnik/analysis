@@ -66,8 +66,8 @@ jobs:
       - run:
           name: Manually install jq
           command: |
-            sudo apt-get update
-            sudo apt-get install jq
+            apt-get update
+            apt-get install -y jq
       - jq/install
       - run:
           name: Deploy
