@@ -26,8 +26,7 @@ jobs:
       - run:
           name: Setup database
           command: |
-            docker-compose exec web bash -c 'yes n | bundle exec rails db:migrate db:seed'
-            no_output_timeout: 30m
+             docker-compose exec web bash -c 'bundle exec rails db:create db:migrate db:seed'
       - run:
           name: Run rspec
           command: docker-compose exec web rspec
