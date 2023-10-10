@@ -76,7 +76,6 @@ gem "aws-sdk", "~> 3.0"
 gem 'rails-i18n'
 gem 'devise-i18n'
 gem 'devise-i18n-views'
-
 # for admin
 gem 'rails_admin', '~> 3.0'
 gem 'cancancan'
