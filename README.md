@@ -1,9 +1,10 @@
 # ABCanalysis
 
 # URL
+![image](https://github.com/dousi-sputnik/analysis/files/12853664/erd.pdf)
 
 # ER図
-[erd.pdf](https://github.com/dousi-sputnik/analysis/files/12853617/erd.pdf)
+![image]
 
 # 概要
 当サイトはABC分析に基づいた商品在庫管理を容易にするためのシステムを提供します。
