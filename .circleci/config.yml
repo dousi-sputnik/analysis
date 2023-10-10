@@ -66,9 +66,8 @@ jobs:
       - run:
           name: Manually install jq
           command: |
-            apt-get update
-            apt-get install -y jq
-      - jq/install
+            apk update
+            apk add jq
       - run:
           name: Deploy
           command: git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git HEAD:master
@@ -76,6 +75,7 @@ jobs:
           name: Run post-deploy tasks
           command: |
             heroku run bin/rails db:migrate -a $HEROKU_APP_NAME
+
 
 orbs:
   build-tools: circleci/build-tools@2.6.3
