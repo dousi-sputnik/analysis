@@ -29,4 +29,5 @@ RUN apt-get update                                                              
 RUN mkdir /abc_analysis
 WORKDIR /abc_analysis
 COPY . /abc_analysis
+RUN yarn install
 RUN bundle install
