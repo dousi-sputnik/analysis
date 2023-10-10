@@ -1860,7 +1860,7 @@ DEPENDENCIES
   rails-controller-testing
   rails-erd
   rails-i18n
-  rails_admin (~> 3.0)
+  rails_admin (~> 3.1.2)
   rspec-rails
   rubocop-airbnb
   sass-rails (>= 6)
