@@ -21,6 +21,11 @@ jobs:
             docker-compose up -d
             docker exec abc_analysis_app curl -4 --retry 10 --retry-delay 3 --retry-connrefused http://localhost:3000
       - run:
+          name: Fix deprecated division in node_modules
+          command: |
+            sed -i 's/line-height: (3em \/ 4);/line-height: math.div(3em, 4);/g' node_modules/rails_admin/node_modules/@fortawesome/fontawesome-free/scss/_larger.scss
+            sed -i 's/margin-left: $fa-li-width * 5\/4;/margin-left: math.div($fa-li-width * 5, 4);/g' node_modules/rails_admin/node_modules/@fortawesome/fontawesome-free/scss/_list.scss
+      - run:
           name: Stop Spring
           command: docker-compose exec web pkill -f spring || true
       - run:
