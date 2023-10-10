@@ -21,9 +21,13 @@ jobs:
             docker-compose up -d
             docker exec abc_analysis_app curl -4 --retry 10 --retry-delay 3 --retry-connrefused http://localhost:3000
       - run:
+          name: Stop Spring
+          command: docker-compose exec web pkill -f spring || true
+      - run:
           name: Setup database
           command: |
             docker-compose exec web bash -c 'yes n | bundle exec rails db:migrate db:seed'
+            no_output_timeout: 30m
       - run:
           name: Run rspec
           command: docker-compose exec web rspec
