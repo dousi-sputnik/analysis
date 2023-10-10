@@ -37,7 +37,6 @@ group :development, :test do
   gem 'pry-nav'
   gem 'rails-erd'
   gem 'annotate'
-  gem 'devise'
   gem 'rails-controller-testing'
   gem 'webmock'
 end
@@ -83,3 +82,5 @@ gem 'rails_admin', '~> 3.0'
 gem 'cancancan'
 gem 'dotenv-rails', groups: [:development, :test]
 gem 'httparty'
+
+gem 'devise'
