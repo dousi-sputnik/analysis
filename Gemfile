@@ -78,7 +78,7 @@ gem 'devise-i18n'
 gem 'devise-i18n-views'
 
 # for admin
-gem 'rails_admin', '~> 3.1.2'
+# gem 'rails_admin', '~> 3.1.2'
 gem 'cancancan'
 gem 'dotenv-rails', groups: [:development, :test]
 gem 'httparty'

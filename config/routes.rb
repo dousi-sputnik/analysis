@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
-  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
+  namespace :admin do
+    resources :users, only: [:index, :destroy]
+  end
+  
   devise_for :users, controllers: {
     sessions: 'sessions'
   }
@@ -28,4 +31,5 @@ Rails.application.routes.draw do
   end
   get '/users', to: redirect('/users/sign_up')
   get '/contacts', to: redirect('/')
+  get '/admin', to: redirect('/')
 end

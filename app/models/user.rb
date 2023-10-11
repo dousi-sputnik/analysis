@@ -27,6 +27,10 @@ class User < ApplicationRecord
     guest? ? 30.minutes : 1.hour
   end
 
+  def admin?
+    admin
+  end
+
   private
 
   def password_confirmation_matches?
