@@ -27,7 +27,6 @@
 
 # 機能一覧
  ・ ユーザー登録、ログイン機能(devise)
- ・ 管理者機能(rails_admin, cancancan)
  ・ 外部API関連(httparty)
 
 # テスト
@@ -36,5 +35,5 @@
    ・　　機能テスト(request)
    ・ 統合テスト(system)
 
-# コードチェック
+# 構文チェック
  ・ rubocop(rubocop-airbnb)
