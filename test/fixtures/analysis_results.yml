@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  jan_code: MyString
+  product_name: MyString
+  sales: 1
+  cumulative_sales: 9.99
+  cumulative_percentage: 9.99
+  classification: MyString
+
+two:
+  user: two
+  jan_code: MyString
+  product_name: MyString
+  sales: 1
+  cumulative_sales: 9.99
+  cumulative_percentage: 9.99
+  classification: MyString

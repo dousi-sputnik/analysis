@@ -1,0 +1,48 @@
+<%= render 'shared/header' %>
+<div class="masthead" style="background-image: url(https://abcanalysis.s3.ap-northeast-1.amazonaws.com/analysis.jpg);">
+  <div class="container">
+    <div class="card mt-4 mb-4">
+      <div class="card-body">
+        <% if @item.present? %>
+          <table class="table table-striped">
+            <tr>
+              <th>商品画像</th>
+              <td colspan="2">
+                <img src="<%= @item[:image][:medium] %>" alt="<%= @item[:name] %>" class="img-fluid">
+              </td>
+            </tr>
+            <tr>
+              <th>商品名</th>
+              <td><%= @item[:name] %></td>
+            </tr>
+            <tr>
+              <th>JANコード</th>
+              <td><%= params[:jan_code] %></td>
+            </tr>
+            <tr>
+              <th>価格</th>
+              <td><%= @item[:price] %>円</td>
+            </tr>
+            <tr>
+              <th>商品説明</th>
+              <td><%= sanitize @item[:description] %></td>
+            </tr>
+            <tr>
+              <th>商品URL</th>
+              <td><%= link_to @item[:url], @item[:url], target: '_blank' %></td>
+            </tr>
+          </table>
+          <table class="table mb-4">
+            <tr class="text-center">
+              <td><%= link_to 'ABC分析表へ', analysis_session_path(@analysis_session), class: "btn btn-dark" %></td>
+            </tr>
+          </table>
+        <% else %>
+          <div class="alert alert-warning" role="alert">
+            商品情報が見つかりませんでした。
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

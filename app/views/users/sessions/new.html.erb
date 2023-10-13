@@ -1,0 +1,38 @@
+<% if flash[:alert] %>
+  <script>
+    alert('<%= flash[:alert] %>');
+  </script>
+<% end %>
+<%= render 'shared/header' %>
+<div class="masthead" style="background-image: url(https://abcanalysis.s3.ap-northeast-1.amazonaws.com/analysis.jpg);">
+  <div class="box2 box-inner">
+    <h1>Log in</h1>
+
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <div class="box-email">
+        <label for="email">Email</label><br />
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
+      </div>
+
+      <div class="box-password">
+        <label for="password">Password</label><br />
+        <%= f.password_field :password, autocomplete: "current-password", class: "form-control" %>
+      </div>
+
+      <% if devise_mapping.rememberable? %>
+        <div class="remember">
+          <%= f.check_box :remember_me %>
+          <%= f.label :remember_me %>
+        </div>
+      <% end %>
+
+      <div class="box-login">
+        <%= f.submit "Log in", class: "btn btn-primary" %>
+      </div>
+    <% end %>
+
+    <div class="box-newusr">
+      <%= render "users/shared/links" %>
+    </div>
+  </div>
+</div>

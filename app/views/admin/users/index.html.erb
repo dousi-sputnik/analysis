@@ -1,0 +1,32 @@
+<%= render 'shared/header' %>
+<div class="masthead" style="background-image: url(https://abcanalysis.s3.ap-northeast-1.amazonaws.com/analysis.jpg);">
+  <div class="container">
+    <div class="card mt-5 mb-5">
+      <div class="card-body">
+        <table class="table mb-4">
+        <h1>ユーザー一覧</h1>
+          <thead>
+            <tr>
+              <th>ユーザー名</th>
+              <th>メールアドレス</th>
+              <th>操作</th>
+              <th>管理者</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @users.each do |user| %>
+              <tr>
+                <td><%= user.name %></td>
+                <td><%= user.email %></td>
+                <td>
+                  <%= link_to '削除', admin_user_path(user), method: :delete, data: { confirm: '本当に削除してよろしいですか？' } %>
+                </td>
+                <td><%= user.admin %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

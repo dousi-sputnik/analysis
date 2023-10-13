@@ -1,0 +1,27 @@
+<h1>ABC分析</h1>
+<%= link_to "Excelで出力", analysis_path(format: :xlsx), class: "btn btn-success" %>
+<table>
+  <thead>
+    <tr>
+      <th>JANコード</th>
+      <th>商品名</th>
+      <th>売上高</th>
+      <th>累計売上高</th>
+      <th>累計売上割合</th>
+      <th>分類</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @abc_items.each do |item| %>
+      <tr>
+        <td><%= item[:jan_code] %></td>
+        <td><%= item[:product_name] %></td>
+        <td><%= item[:sales] %></td>
+        <td><%= item[:cumulative_sales] %></td>
+        <td><%= item[:cumulative_percentage] %></td>
+        <td><%= item[:classification] %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= link_to 'Back', user_items_path(current_user) %>

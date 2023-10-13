@@ -1,0 +1,54 @@
+<%= render 'shared/header' %>
+<div class="masthead" style="background-image: url(https://abcanalysis.s3.ap-northeast-1.amazonaws.com/analysis.jpg);">  
+  <div class="box3 box-inner">  
+    <h2>プロフィール編集</h2>
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+      <%= render "users/shared/error_messages", resource: resource %>
+
+      <div class="field box-name">
+        <%= f.label :name, "Name" %><br />
+        <%= f.text_field :name, autofocus: true %>
+      </div>
+
+      <div class="field box-email">
+        <%= f.label :email %><br />
+        <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+      </div>
+
+      <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+        <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+      <% end %>
+
+      <div class="field box-password">
+        <%= f.label :password %> <small>(変更が不要なら空白)</small><br/>
+        <%= f.password_field :password, autocomplete: "new-password" %>
+        <% if @minimum_password_length %>
+          <br />
+          <em><%= @minimum_password_length %>文字以上</em>
+        <% end %>
+      </div>
+
+      <div class="field box-password">
+        <%= f.label :password_confirmation %><br />
+        <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+      </div>
+
+      <div class="field box-password">
+        <%= f.label :current_password %> <small>(現在のパスワードを入力して下さい)</small><br />
+        <%= f.password_field :current_password, autocomplete: "current-password" %>
+      </div>
+
+      <div class="actions box-login">
+        <%= f.submit "Update", class: "btn btn-primary" %>
+      </div>
+    <% end %>
+
+    <h3>アカウントを削除</h3>
+
+    <div class="actions box-danger">
+      <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete, class: "btn btn-danger" %>
+    </div>
+
+    <%= link_to "Back", :back %>
+  </div>
+</div>

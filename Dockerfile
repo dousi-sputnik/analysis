@@ -1,5 +1,5 @@
 # -*- mode: dockerfile -*-
-FROM ruby:3.0.4-buster
+FROM ruby:3.2.2-buster
 
 WORKDIR /abc_analysis
 

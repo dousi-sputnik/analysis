@@ -1,0 +1,26 @@
+<%= form_with url: create_bulk_user_items_path(current_user), local: false, format: :js do |f| %>
+  <div class="card">
+    <div class="card-body">
+      <div class="mb-3">
+        <%= f.label :title, "ABC分析のタイトル", class: 'form-label' %>
+        <%= f.text_field :title, class: 'form-control', rows: 1, placeholder: "タイトルを記述してください" %>
+      </div>
+      
+      <div class="mb-3">
+        <%= f.label :description, "説明", class: 'form-label' %>
+        <%= f.text_area :description, class: 'form-control', rows: 5, placeholder: "分析に関する説明を記述してください" %>
+      </div>
+      
+      <div class="mb-3">
+        <label for="bulk_input" class="form-label">Excelデータペーストエリア</label>
+        <%= f.text_area :bulk_input, class: 'form-control', rows: 30, placeholder: text_placeholder %>
+      </div>
+      
+      <%= render 'shared/error_messages', object: @item %>
+      
+      <div class="mb-3 text-center">
+        <%= f.submit 'ABC分析表を出力', class: 'btn btn-dark btn-lg mb-4' %>
+      </div>
+    </div>
+  </div>
+<% end %>

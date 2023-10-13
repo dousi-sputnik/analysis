@@ -1,0 +1,23 @@
+<%= render 'shared/header' %>
+<div class="masthead" style="background-image: url(https://abcanalysis.s3.ap-northeast-1.amazonaws.com/analysis.jpg);">
+  <div class="box1 box-inner">
+    <h2>パスワードをお忘れですか？</h2>
+
+    <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+      <%= render "users/shared/error_messages", resource: resource %>
+
+      <div class="box-email">
+        <label for="email">Email</label><br />
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
+      </div>
+
+      <div class="box-login">
+        <%= f.submit "パスワードの変更を申請する", class: "btn btn-primary"  %>
+      </div>
+    <% end %>
+
+    <div class="box-newusr">
+      <%= render "users/shared/links" %>
+    </div>
+  </div>
+</div>

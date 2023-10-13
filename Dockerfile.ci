@@ -1,5 +1,5 @@
 # -*- mode: dockerfile -*-
-FROM ruby:3.0.4-buster
+FROM ruby:3.2.2-buster
 
 RUN apt-get update                                                                                                                      \
   && apt-get install                                                                                                                    \
@@ -23,9 +23,11 @@ RUN apt-get update                                                              
     yarn                                                                                                                                \
     zip                                                                                                                                 \
   && gem install foreman                                                                                                                \
+  && gem install bundler:2.4.20                                                                                                         \
   && apt-get clean
 
 RUN mkdir /abc_analysis
 WORKDIR /abc_analysis
 COPY . /abc_analysis
+RUN yarn install
 RUN bundle install

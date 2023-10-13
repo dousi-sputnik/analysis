@@ -1,0 +1,2 @@
+module AnalysisSessionsHelper
+end

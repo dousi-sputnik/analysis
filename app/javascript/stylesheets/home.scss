@@ -1,0 +1,47 @@
+.masthead h1, .masthead .h1 {
+  font-size: 2.25rem;
+}
+
+.masthead .card {
+  border-radius: 15px;
+  background-color: rgba($color: #ffffff, $alpha: 0.9);
+  color: black;
+}
+
+@media (min-width: 992px) {
+  .masthead {
+    padding-top: 4.5rem;
+    padding-bottom: 0;
+  }
+  .masthead p {
+    font-size: 1.15rem;
+  }
+  .masthead h1, .masthead .h1 {
+    font-size: 3rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  .masthead h1, .masthead .h1 {
+    font-size: 3.5rem;
+  }
+}
+
+li {
+  list-style: none;
+}
+
+.fixed-height {
+  height: auto;
+  object-fit: contain;
+  max-height: 300px;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-color: black;
+}
+
+.carousel-indicators button {
+  background-color: rgba($color: #000000, $alpha: 0.3) !important;
+}

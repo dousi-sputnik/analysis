@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '3.0.4'
+ruby '3.2.2'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.1.6'
@@ -12,7 +12,7 @@ gem 'puma', '~> 5.0'
 # Use SCSS for stylesheets
 gem 'sass-rails', '>= 6'
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
-gem 'webpacker', '~> 5.0'
+gem 'webpacker', '5.4.3'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -34,8 +34,10 @@ group :development, :test do
   gem 'pry-rails'
   gem 'pry-doc'
   gem 'pry-byebug'
-  gem 'rails-erd'
+  gem 'pry-nav'
   gem 'annotate'
+  gem 'rails-controller-testing'
+  gem 'webmock'
 end
 
 group :development do
@@ -48,11 +50,8 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'rubocop-airbnb'
-  gem 'devise'
-  gem 'caxlsx'
-  gem 'caxlsx_rails'
-  gem 'wicked_pdf'
-  gem 'wkhtmltopdf-binary'
+  gem 'mini_magick'
+  gem "rails-erd"
 end
 
 group :test do
@@ -63,9 +62,26 @@ group :test do
   gem 'webdrivers'
   gem 'rspec-rails'
   gem 'factory_bot_rails'
+  gem 'faker'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem "aws-sdk", "~> 3.0"
+
+# for japanese
+gem 'rails-i18n'
+gem 'devise-i18n'
+gem 'devise-i18n-views'
+
+# for admin
+# gem 'rails_admin', '~> 3.1.2'
+gem 'cancancan'
+gem 'dotenv-rails', groups: [:development, :test]
+gem 'httparty'
+
+gem 'devise'
+
+gem 'caxlsx'
+gem 'caxlsx_rails'
