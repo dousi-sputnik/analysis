@@ -29,14 +29,18 @@ https://analysis-by-abc-de031c7dc9a1.herokuapp.com/
 　　| Yahoo! JAPAN Web API 
 
 # 機能一覧
- ・ ユーザー登録、ログイン機能(devise)
- ・ 外部API関連(httparty)
+  | 主なライブラリ | 詳細 |
+  | ----------- | ---- |
+   | devise | ユーザー関連 |
+   | httparty | 自動的にJSON・XMLを解析し、Rubyのハッシュに変換 |
+   | caxlsx/caxlsx_rails | Excelファイル出力 |
 
 # テスト
- ・ RSpec
-   ・ 単体テスト(modle)
-   ・　　機能テスト(request)
-   ・ 統合テスト(system)
+| 使用ライブラリ  | RSpec |
+| -----------  | ----- |
+|　実装内容   | 単体テスト(modle) |
+|   |　　機能テスト(request) |
+|   | 統合テスト(system) |
 
 # 構文チェック
  ・ rubocop(rubocop-airbnb)
