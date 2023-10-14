@@ -4,7 +4,7 @@
 https://analysis-by-abc-de031c7dc9a1.herokuapp.com/
 
 # ER図
-<img width="1051" alt="スクリーンショット 2023-10-10 15 56 26" src="https://github.com/dousi-sputnik/analysis/assets/97434344/f3325d12-d134-4942-99c3-b3cffff95b5c">
+<img width="500" alt="スクリーンショット 2023-10-10 15 56 26" src="https://github.com/dousi-sputnik/analysis/assets/97434344/f3325d12-d134-4942-99c3-b3cffff95b5c">
 
 # 概要
 当サイトはABC分析に基づいた商品在庫管理を容易にするためのシステムを提供します。
@@ -43,7 +43,9 @@ https://analysis-by-abc-de031c7dc9a1.herokuapp.com/
 |   | 統合テスト(system) |
 
 # 構文チェック
- ・ rubocop(rubocop-airbnb)
+ | 使用ライブラリ | 詳細 |
+ | ----- | ----- |
+ | rubocop(rubocop-airbnb) | 指定したフォルダ内およびファイルのコードチェック |
 
 # 使用例
 
