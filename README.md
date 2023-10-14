@@ -15,16 +15,18 @@ https://analysis-by-abc-de031c7dc9a1.herokuapp.com/
   4. YahooAPIと連携しているため出力されたJANコードを直接クリック(もしくは検索画面に半角数字で直接入力)することで商品の概要の情報を取得できます。またそのページからYahooショッピングの該当商品へのリンクもあります。
 
 # 使用技術
- ・ Ruby 3.2.2
- ・ Ruby on Rails 6.1.7
- ・ MySQL 8.0
- ・ Puma
- ・ AWS S3
- ・ Docker/Docker-compose
 
- ・ CircleCI CI/CD
- ・ RSpec
-　　・ Yahoo! JAPAN Web API
+ | 使用技術              |
+ | ---------------------|
+ | Ruby 3.2.2           |
+ | Ruby on Rails 6.1.7  |
+ | MySQL 8.0            |
+ | Puma                 |
+ | AWS S3               |
+ | Docker/Docker-compose |
+ | CircleCI CI/CD       |
+ | RSpec                |
+　　| Yahoo! JAPAN Web API 
 
 # 機能一覧
  ・ ユーザー登録、ログイン機能(devise)
