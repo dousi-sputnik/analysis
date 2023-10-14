@@ -84,5 +84,28 @@ https://analysis-by-abc-de031c7dc9a1.herokuapp.com/
 
  <img width="500" alt="スクリーンショット 2023-10-14 11 01 13" src="https://github.com/dousi-sputnik/analysis/assets/97434344/01c5817d-5208-4afe-a093-4bb194c5b44d">  
  
-4. タイトルと説明文をそれぞれ最低1文字以上入力後、下記スプレッドシートを左上(493301219583)から右下(3)まで選択してコピーしといたものを「Excelデータペーストエリア」へペースト。その後「ABC分析表を出力」ボタンをクリック
-5. ABC分析表が出力されるので、Excel形式でのダウンロードやJanコードから商品詳細ページへ遷移できる。最後にヘッダーメニューにあるlogoutか「一覧表へ戻る」ボタンで終了
+3. タイトルと説明文をそれぞれ最低1文字以上入力後、下記スプレッドシートを左上(493301219583)から右下(3)まで選択してコピーしといたものを「Excelデータペーストエリア」へペースト。その後「ABC分析表を出力」ボタンをクリック
+
+  <img width="500" alt="スクリーンショット 2023-10-14 11 02 23" src="https://github.com/dousi-sputnik/analysis/assets/97434344/b264dd97-318d-4d0d-8ace-13c977398636">
+
+  <img width="500" alt="スクリーンショット 2023-10-14 11 03 06" src="https://github.com/dousi-sputnik/analysis/assets/97434344/88bde802-c30d-4975-a64f-955ee90660b7">
+
+  <img width="500" alt="スクリーンショット 2023-10-14 11 03 42" src="https://github.com/dousi-sputnik/analysis/assets/97434344/00e30b57-894f-43a2-8d8e-a5a75a5a31d7">
+
+  <img width="500" alt="スクリーンショット 2023-10-14 11 04 01" src="https://github.com/dousi-sputnik/analysis/assets/97434344/624ddef9-7193-4849-9eb0-3c15f736c0a0">
+
+4. ABC分析表が出力されるので、Excel形式でのダウンロードやJanコードから商品詳細ページへ遷移できる。最後にヘッダーメニューにあるlogoutか「一覧表へ戻る」ボタンで終了
+
+   <img width="500" alt="スクリーンショット 2023-10-14 11 04 29" src="https://github.com/dousi-sputnik/analysis/assets/97434344/2042287c-ef47-40b2-8aec-dc8bfef5ac18">
+
+   「Excelでダウンロード」ボタンをクリックでシートをダウンロード(画像はNumbers)
+
+  <img width="500" alt="スクリーンショット 2023-10-14 11 05 18" src="https://github.com/dousi-sputnik/analysis/assets/97434344/c006ba20-ab98-428b-aea7-b12e7fcc5067">
+
+  Janコードをクリックすると商品詳細ページへ遷移(上部のJanコードを検索欄での入力でも遷移します)
+
+  <img width="500" alt="スクリーンショット 2023-10-14 11 05 56" src="https://github.com/dousi-sputnik/analysis/assets/97434344/2efb7483-eb8b-4265-8aca-e2bce2aafe33">
+
+  最後は画面上部の 「Logout」で最初のトップページへ戻れます。
+
+  <img width="500" alt="スクリーンショット 2023-10-14 11 06 11" src="https://github.com/dousi-sputnik/analysis/assets/97434344/4e9ac0f2-1274-40e9-a3d9-ab0c2737060d">
