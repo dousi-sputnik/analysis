@@ -39,7 +39,7 @@ https://analysis-by-abc-de031c7dc9a1.herokuapp.com/
 | 使用ライブラリ  | RSpec |
 | -----------  | ----- |
 |　実装内容   | 単体テスト(modle) |
-|   |　　機能テスト(request) |
+|   |　機能テスト(request) |
 |   | 統合テスト(system) |
 
 # 構文チェック
