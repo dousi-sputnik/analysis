@@ -1,0 +1,33 @@
+wb = xlsx_package.workbook
+wb.add_worksheet(name: "ABC分析レポート") do |sheet|
+
+  sheet.page_setup.paper_width = '210mm'
+  sheet.page_setup.paper_height = '297mm'
+  sheet.page_setup.orientation = :portrait
+
+  title_style = wb.styles.add_style(sz: 16, alignment: { horizontal: :center })
+  chapter_title_style = wb.styles.add_style(sz: 14, b: true)
+
+  sheet.add_row ["ABC分析レポート"], style: title_style
+  sheet.merge_cells "A1:O1"
+
+  sheet.add_row ["分析の概要"], style: chapter_title_style
+  sheet.merge_cells "A2:O2"
+  sheet.add_row [@report.overview]
+  sheet.merge_cells "A3:O3"
+
+  sheet.add_row ["Aランクの傾向"], style: chapter_title_style
+  sheet.merge_cells "A4:O4"
+  sheet.add_row [@report.rank_a_trend]
+  sheet.merge_cells "A5:O5"
+
+  sheet.add_row ["Bランクの傾向"], style: chapter_title_style
+  sheet.merge_cells "A6:O6"
+  sheet.add_row [@report.rank_b_trend]
+  sheet.merge_cells "A7:O7"
+
+  sheet.add_row ["Cランクの傾向"], style: chapter_title_style
+  sheet.merge_cells "A8:O8"
+  sheet.add_row [@report.rank_c_trend]
+  sheet.merge_cells "A9:O9"
+end
