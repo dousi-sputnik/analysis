@@ -69,6 +69,11 @@ jobs:
             apk update
             apk add jq
       - run:
+          name: Prepare for deployment
+          command: |
+            git checkout master
+            git pull https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git master
+      - run:
           name: Deploy
           command: git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git HEAD:master
       - run:
