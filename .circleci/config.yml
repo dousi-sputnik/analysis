@@ -69,17 +69,19 @@ jobs:
             apk update
             apk add jq
       - run:
-          name: Prepare for deployment
+          name: Fetch remote changes
           command: |
-            git checkout main
-            git pull https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git main
+            git fetch https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git master:master_temp
+            git checkout master_temp
+            git merge --allow-unrelated-histories -m "Merge remote changes" HEAD
       - run:
           name: Deploy
-          command: git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git HEAD:main
+          command: git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git HEAD:master
       - run:
           name: Run post-deploy tasks
           command: |
             heroku run bin/rails db:migrate -a $HEROKU_APP_NAME
+
 
 
 orbs:
