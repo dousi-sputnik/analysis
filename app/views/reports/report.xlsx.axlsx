@@ -1,6 +1,5 @@
 wb = xlsx_package.workbook
 wb.add_worksheet(name: "ABC分析レポート") do |sheet|
-
   sheet.page_setup.paper_width = '210mm'
   sheet.page_setup.paper_height = '297mm'
   sheet.page_setup.orientation = :portrait
