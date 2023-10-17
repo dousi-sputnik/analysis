@@ -1,0 +1,66 @@
+<%= render 'shared/header' %>
+<div class="masthead" style="background-image: url(https://abcanalysis.s3.ap-northeast-1.amazonaws.com/analysis.jpg);">
+  <div class="container">
+    <div class="row mt-5 mb-5">
+      <div class="col-md-8 col-lg-6 pb-3">
+        <div class="card">
+          <div class="card-body">
+            <h2>ABC分析表</h2>
+            <table class="table mb-4 table-striped table-bordered">
+              <thead>
+                <tr>
+                  <th>JANコード</th>
+                  <th>商品名</th>
+                  <th>売上</th>
+                  <th>累計売上</th>
+                  <th>累計売上％</th>
+                  <th>分類</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @abc_items.each do |item| %>
+                  <tr>
+                    <td><%= item.jan_code %></td>
+                    <td><%= item.product_name %></td>
+                    <td><%= item.sales %></td>
+                    <td><%= item.cumulative_sales %></td>
+                    <td><%= item.cumulative_percentage %></td>
+                    <td><%= item.classification %></td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 col-lg-6">
+        <div class="card">
+          <div class="card-body">
+            <h2>レポート編集</h2>
+            <%= form_with model: [ @analysis_session, @report ], local: true do |form| %>
+              <div class="field">
+                <%= form.label :overview, "分析の概要" %>
+                <%= form.text_area :overview, class: "form-control", rows: 10 %>
+              </div>
+              <div class="field">
+                <%= form.label :rank_a_trend, "Aランクの傾向" %>
+                <%= form.text_area :rank_a_trend, class: "form-control", rows: 10 %>
+              </div>
+              <div class="field">
+                <%= form.label :rank_b_trend, "Bランクの傾向" %>
+                <%= form.text_area :rank_b_trend, class: "form-control", rows: 10 %>
+              </div>
+              <div class="field">
+                <%= form.label :rank_c_trend, "Cランクの傾向" %>
+                <%= form.text_area :rank_c_trend, class: "form-control", rows: 10 %>
+              </div>
+              <div class="text-center">
+                <%= form.submit "レポートを更新", class: "btn btn-dark mt-3" %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

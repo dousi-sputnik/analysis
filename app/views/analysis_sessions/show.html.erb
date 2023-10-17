@@ -30,6 +30,7 @@
         <table class="table mb-4">
           <tr class="text-center">
             <td><%= link_to 'Excelでダウンロード', analysis_session_path(@analysis_session, format: :xlsx), class: 'btn btn-dark' %></td>
+            <td><%= link_to '分析レポートを作成する', new_analysis_session_report_path(@analysis_session), class: 'btn btn-dark' %></td>
           </tr>
         </table>
         

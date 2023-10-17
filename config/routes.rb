@@ -28,6 +28,7 @@ Rails.application.routes.draw do
     member do
       get :show_item
     end
+    resources :reports, only: [:new, :create, :show, :edit, :update, :destroy]
   end
   get '/users', to: redirect('/users/sign_up')
   get '/contacts', to: redirect('/')

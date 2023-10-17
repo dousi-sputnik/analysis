@@ -57,6 +57,39 @@
           </div>
         </div>
       </div>
+      <div class="card mt-5">
+        <div class="card-header text-center">
+          <h2>分析レポート一覧</h2>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>タイトル</th>
+                  <th>レポート</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @analysis_sessions_with_reports.order(created_at: :desc).each do |analysis_session| %>
+                  <tr>
+                    <td><%= analysis_session.title %></td>
+                    <td>
+                      <% if analysis_session.reports.any? %> <!-- レポートが存在する場合 -->
+                        <% analysis_session.reports.each do |report| %>
+                          <%= link_to "レポートを表示", analysis_session_report_path(analysis_session, report) %>
+                        <% end %>
+                      <% else %> <!-- レポートが存在しない場合 -->
+                        <%= link_to "分析レポートを作成する", new_analysis_session_report_path(analysis_session) %>
+                      <% end %>
+                    </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 </div>

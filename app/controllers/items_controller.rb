@@ -5,6 +5,7 @@ class ItemsController < ApplicationController
   def index
     @items = current_user.items.order(sales: :desc)
     @analysis_sessions = current_user.analysis_sessions.order(created_at: :desc)
+    @analysis_sessions_with_reports = current_user.analysis_sessions.includes(:reports)
   end
 
   def new
