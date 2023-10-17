@@ -31,9 +31,13 @@ https://analysis-by-abc-de031c7dc9a1.herokuapp.com/
 # 機能一覧
   | 主なライブラリ | 詳細 |
   | ----------- | ---- |
-   | devise | ユーザー関連 |
+   | devise | ユーザー登録・ログイン機能 |
    | httparty | 自動的にJSON・XMLを解析し、Rubyのハッシュに変換 |
    | caxlsx/caxlsx_rails | Excelファイル出力 |
+   | aws-sdk | awsサービス利用のためのプログラム |
+   | dotenv-rails | 環境変数管理 |
+   | devise/rails-i18n | メッセージ等の日本語化 |
+   | cancancan | 権限管理 |
 
 # テスト
 | 使用ライブラリ  | RSpec |
@@ -41,6 +45,8 @@ https://analysis-by-abc-de031c7dc9a1.herokuapp.com/
 |　実装内容   | 単体テスト(modle) |
 |   |　機能テスト(request) |
 |   | 統合テスト(system) |
+|   | webmock |
+|   | 外部APIのテスト |
 
 # 構文チェック
  | 使用ライブラリ | 詳細 |
@@ -76,15 +82,15 @@ https://analysis-by-abc-de031c7dc9a1.herokuapp.com/
 4987072124901 | かんたん洗浄丸 | 7
 4989409076341 | 排水管一発洗浄２０ｇ×４袋 | 3
 
- 1. 上記URL( https://analysis-by-abc-de031c7dc9a1.herokuapp.com/ )から当サイトのトップページへ遷移する
+ ## 1. 上記URL( https://analysis-by-abc-de031c7dc9a1.herokuapp.com/ )から当サイトのトップページへ遷移する
     
  <img width="500" alt="スクリーンショット 2023-10-14 11 00 50" src="https://github.com/dousi-sputnik/analysis/assets/97434344/aec4ec87-1301-4868-b4b9-c54ddf513561"> 
  
- 2.  ゲストログイン機能を使いABC分析ページへ遷移し、「ABC分析開始」ボタンをクリック
+ ## 2.  ゲストログイン機能を使いABC分析ページへ遷移し、「ABC分析開始」ボタンをクリック
 
  <img width="500" alt="スクリーンショット 2023-10-14 11 01 13" src="https://github.com/dousi-sputnik/analysis/assets/97434344/01c5817d-5208-4afe-a093-4bb194c5b44d">  
  
-3. タイトルと説明文をそれぞれ最低1文字以上入力後、下記スプレッドシートを左上(493301219583)から右下(3)まで選択してコピーしといたものを「Excelデータペーストエリア」へペースト。その後「ABC分析表を出力」ボタンをクリック
+## 3. タイトルと説明文をそれぞれ最低1文字以上入力後、下記スプレッドシートを左上(493301219583)から右下(3)まで選択してコピーしといたものを「Excelデータペーストエリア」へペースト。その後「ABC分析表を出力」ボタンをクリック
 
   <img width="500" alt="スクリーンショット 2023-10-14 11 02 23" src="https://github.com/dousi-sputnik/analysis/assets/97434344/b264dd97-318d-4d0d-8ace-13c977398636">
 
@@ -94,26 +100,48 @@ https://analysis-by-abc-de031c7dc9a1.herokuapp.com/
 
   <img width="500" alt="スクリーンショット 2023-10-14 11 04 01" src="https://github.com/dousi-sputnik/analysis/assets/97434344/624ddef9-7193-4849-9eb0-3c15f736c0a0">
 
-4. ABC分析表が出力されるので、Excel形式でのダウンロードやJanコードから商品詳細ページへ遷移できる。最後にヘッダーメニューにあるlogoutか「一覧表へ戻る」ボタンで終了
+## 4. ABC分析表が出力されるので、Excel形式でのダウンロードやJanコードから商品詳細ページへ遷移できる。最後にヘッダーメニューにあるlogoutか「一覧表へ戻る」ボタンで終了
 
    <img width="500" alt="スクリーンショット 2023-10-14 11 04 29" src="https://github.com/dousi-sputnik/analysis/assets/97434344/2042287c-ef47-40b2-8aec-dc8bfef5ac18">
 
-   「Excelでダウンロード」ボタンをクリックでシートをダウンロード(画像はNumbers)
+   ### 「Excelでダウンロード」ボタンをクリックでシートをダウンロード(画像はNumbers)
 
   <img width="500" alt="スクリーンショット 2023-10-14 11 05 18" src="https://github.com/dousi-sputnik/analysis/assets/97434344/c006ba20-ab98-428b-aea7-b12e7fcc5067">
 
-  Janコードをクリックすると商品詳細ページへ遷移(上部のJanコードを検索欄での入力でも遷移します)
+  ### Janコードをクリックすると商品詳細ページへ遷移(上部のJanコードを検索欄での入力でも遷移します)
 
   <img width="500" alt="スクリーンショット 2023-10-14 11 05 56" src="https://github.com/dousi-sputnik/analysis/assets/97434344/2efb7483-eb8b-4265-8aca-e2bce2aafe33">
 
-  最後は画面上部の 「Logout」で最初のトップページへ戻れます。
+  ### 最後は画面上部の 「Logout」で最初のトップページへ戻れます。
 
   <img width="500" alt="スクリーンショット 2023-10-14 11 06 11" src="https://github.com/dousi-sputnik/analysis/assets/97434344/4e9ac0f2-1274-40e9-a3d9-ab0c2737060d">
 
 
+  ## レポート作成機能も実装しました。
+
+  ### 操作はABC分析ページの下部から「分析レポートを作成する」リンクをクリック
+
+  <img width="500" alt="スクリーンショット 2023-10-17 13 06 23" src="https://github.com/dousi-sputnik/analysis/assets/97434344/1fd5d4a5-8da9-4d81-8d30-f2e0e3b9bb0f">
+
+  ### レポート作成画面に遷移するので、分析表を閲覧しながらレポートの作成が可能です。
+
+<img width="500" alt="スクリーンショット 2023-10-17 13 06 45" src="https://github.com/dousi-sputnik/analysis/assets/97434344/4aba8117-e9dd-4e05-858d-63a815b39953">
+
+  ### 各項目を書き終えたら「レポートを保存」ボタンをクリック
+
+<img width="500" alt="スクリーンショット 2023-10-17 13 09 22" src="https://github.com/dousi-sputnik/analysis/assets/97434344/8f94345b-3d79-463f-ac65-7b98a44cbced">
+
+ ### レポートが表示されます。必要ならexcel形式でのダウンロードも可能ですし、修正も可能です。
+
+  <img width="500" alt="スクリーンショット 2023-10-17 13 09 37" src="https://github.com/dousi-sputnik/analysis/assets/97434344/7de52ba2-8ed4-4ea1-984d-206d56c24728">
+
+
+
 # 開発の経緯
   現職はホームセンターの売り場担当者ですが、下記の動機があり当サイトの制作を行いました。
-  「スマートフォンですぐに分析結果を閲覧したい　商品名だけでどの商品かがわからなければ即検索したい」
+  
+  「スマートフォンですぐに分析結果を閲覧したい　商品名だけで商品のイメージが浮かばなければ即検索したい」
+  
   理由としては商品の在庫分析を紙で出力すると嵩張りますし(一回の出力で両面にしても20枚ほど)、売上などが載っている機密情報(もちろん見本の表の売り上げの数字は適当です)もあるため文書の管理という業務も追加されてしまいます。
   しかし、スマホで管理することができればその手間がなくなります。
   また、上記見本は日用品なので商品名を見ればどのような商品かは想像が容易ですが、現在の担当が金物になるので、そうすると商品名だけだとイマイチ想像できないものがあります。
