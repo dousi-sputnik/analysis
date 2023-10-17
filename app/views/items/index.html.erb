@@ -73,12 +73,16 @@
               <tbody>
                 <% @analysis_sessions_with_reports.order(created_at: :desc).each do |analysis_session| %>
                   <tr>
-                    <th><%= analysis_session.title %></th>
-                    <th>
-                      <% analysis_session.reports.each do |report| %>
-                        <%= link_to "レポートを表示", analysis_session_report_path(analysis_session, report) %>
+                    <td><%= analysis_session.title %></td>
+                    <td>
+                      <% if analysis_session.reports.any? %> <!-- レポートが存在する場合 -->
+                        <% analysis_session.reports.each do |report| %>
+                          <%= link_to "レポートを表示", analysis_session_report_path(analysis_session, report) %>
+                        <% end %>
+                      <% else %> <!-- レポートが存在しない場合 -->
+                        <%= link_to "分析レポートを作成する", new_analysis_session_report_path(analysis_session) %>
                       <% end %>
-                    </th>
+                    </td>
                   </tr>
                 <% end %>
               </tbody>
