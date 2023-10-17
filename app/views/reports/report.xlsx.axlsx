@@ -1,9 +1,8 @@
 wb = xlsx_package.workbook
 wb.add_worksheet(name: "ABC分析レポート") do |sheet|
-
-  sheet.page_setup.paper_width = '210mm'
-  sheet.page_setup.paper_height = '297mm'
-  sheet.page_setup.orientation = :portrait
+  sheet.page_setup.paper_width = '297mm'
+  sheet.page_setup.paper_height = '210mm'
+  sheet.page_setup.orientation = :landscape
 
   title_style = wb.styles.add_style(sz: 16, alignment: { horizontal: :center })
   chapter_title_style = wb.styles.add_style(sz: 14, b: true)

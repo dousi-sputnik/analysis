@@ -13,6 +13,7 @@ class ReportsController < ApplicationController
     if @report.save
       redirect_to analysis_session_report_path(@analysis_session, @report), notice: 'レポートが作成されました。'
     else
+      set_abc_items
       render :new
     end
   end
@@ -37,6 +38,7 @@ class ReportsController < ApplicationController
     if @report.update(report_params)
       redirect_to analysis_session_report_path(@analysis_session, @report), notice: 'レポートが更新されました。'
     else
+      set_abc_items
       render :edit
     end
   end
@@ -53,10 +55,14 @@ class ReportsController < ApplicationController
   end
 
   def report_params
-    params.require(:report).permit(:content, :overview, :rank_a_trend, :rank_b_trend, :rank_c_trend)
+    params.require(:report).permit(:overview, :rank_a_trend, :rank_b_trend, :rank_c_trend)
   end
 
   def set_report
     @report = @analysis_session.reports.find(params[:id])
+  end
+
+  def set_abc_items
+    @abc_items = @analysis_session.analysis_results
   end
 end
