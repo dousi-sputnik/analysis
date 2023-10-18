@@ -75,11 +75,11 @@
                   <tr>
                     <td><%= analysis_session.title %></td>
                     <td>
-                      <% if analysis_session.reports.any? %> <!-- レポートが存在する場合 -->
+                      <% if analysis_session.reports.any? %>
                         <% analysis_session.reports.each do |report| %>
                           <%= link_to "レポートを表示", analysis_session_report_path(analysis_session, report) %>
                         <% end %>
-                      <% else %> <!-- レポートが存在しない場合 -->
+                      <% else %>
                         <%= link_to "分析レポートを作成する", new_analysis_session_report_path(analysis_session) %>
                       <% end %>
                     </td>

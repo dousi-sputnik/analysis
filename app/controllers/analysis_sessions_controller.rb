@@ -4,6 +4,7 @@ class AnalysisSessionsController < ApplicationController
 
   def show
     @abc_items = @analysis_session.analysis_results
+    @has_report = @analysis_session.reports.any?
 
     respond_to do |format|
       format.html
